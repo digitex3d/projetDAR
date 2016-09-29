@@ -43,10 +43,7 @@
 	<!-- ##################### FIN TOP MENU ##################### -->
 
 	<div id="main">
-		<div class="logo">
-			<img alt="Utwitter" src="Utwitter.png">
-			<p>Le twitteur des étudiants de l'UPMC</p>
-		</div>
+
 		
 		<!-- ##################### REGISTRATION / CONNEXION  ##################### -->
 		<div class="offline_panels">
