@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource
+        name="jdbc/db" type="javax.sql.DataSource"
+        maxActive="100" maxIdle="30" maxWait="10000"
+        url="jdbc:mysql://132.227.201.129:33306/annic_federico"
+        driverClassName="com.mysql.jdbc.Driver"
+        username="annic_federico" password="annic_federico"
+        factory="org.apache.commons.dbcp.BasicDataSourceFactory" 
+    />
+</Context>
