@@ -52,7 +52,7 @@ public class GeneralTools {
 	public static void serverLog(String msg){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date today = new Date();
-		LOGGER.log( Level.FINE, dateFormat.format(today) + ": " + msg );
+		System.out.println(msg);
 		
 	}
 	

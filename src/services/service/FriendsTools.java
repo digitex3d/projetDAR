@@ -25,7 +25,7 @@ import database.DBStatic;
  *
  */
 public class FriendsTools {
-	public static final String MDB_NAME = "annic_federico";
+	public static final String MDB_NAME = "dar";
 
 	/*
 	 * Ajoute un ami dans le tableau "friends" de la base de données

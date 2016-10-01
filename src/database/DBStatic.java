@@ -61,9 +61,8 @@ public class DBStatic {
 	/*
 	 * Retourne une connexion à MySQL
 	 */
-	public static Connection getMySQLConnection() throws SQLException{
-		
-		GeneralTools.serverLog("-------- MySQL JDBC Connection Testing ------------\n", "DBStatic", Level.FINER);
+	public static Connection getMySQLConnection(){
+		GeneralTools.serverLog("-------- MySQL JDBC Connection Testing ------------\n", "DBStatic", Level.FINE);
 
 		 
 		try {
@@ -75,11 +74,16 @@ public class DBStatic {
 		
 		}
 	 
-		GeneralTools.serverLog("MySQL JDBC Driver enregistré\n", "DBStatic", Level.FINER);
+		GeneralTools.serverLog("MySQL JDBC Driver enregistré\n", "DBStatic", Level.FINE);
 
 		Connection connection = null;
 	 	
-		connection = DriverManager.getConnection(DB_CONNECTION,DB_USER , DB_PASSWORD);
+		try {
+			connection = DriverManager.getConnection(DB_CONNECTION,DB_USER , DB_PASSWORD);
+		} catch (SQLException e) {
+			GeneralTools.serverLog("Pas possible de se connecter à MySQL!",  Level.FINE);
+			
+		}
 	 
 	 
 		if (connection != null) {

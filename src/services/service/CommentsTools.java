@@ -28,7 +28,7 @@ import database.DBStatic;
  *
  */
 public class CommentsTools {
-	public static final String MDB_NAME = "annic_federico";
+	public static final String MDB_NAME = "dar";
 	
 	/**
 	 * Ajoute un commentaire à la base mongo

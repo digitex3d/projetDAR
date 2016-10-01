@@ -2,7 +2,7 @@
 
 
 // path du serveur
-server_path="https://dar-galleriafoto.rhcloud.com/ANNIC_FEDERICO/";
+server_path="http://localhost:8080/projetDAR/";
 
 
 /*
