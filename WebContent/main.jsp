@@ -3,7 +3,7 @@
 <html lang="fr-FR">
 
 <head>
-<title>UTweet</title>
+<title>projetDAR</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="main.css">
 <link rel="stylesheet" type="text/css" href="loading.css">
