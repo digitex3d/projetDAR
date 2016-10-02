@@ -43,12 +43,15 @@ Timeline.prototype.getHtml = function(){
 
 //############################ COMMENT ###############################
 
-function Comment (id, author, text, date, score) {
+function Comment (id, author, text, date, score, prix, desc, dim) {
 	this.id=id;
 	this.author=author;
 	this.text=text;
 	this.date=date;
 	this.likes;
+	this.prix=prix;
+	this.desc=desc;
+	this.dim=dim;
 
 	if (score == undefined) {
 		this.score=0;
@@ -105,6 +108,15 @@ Comment.prototype.getHtml = function() {
 								like_button+
 								"<span  id=\"likes_number_" + cid +"\"> </span>"+
 							"</div>" +
+						"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">" +
+								this.prix +
+						"</div>" +
+						"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
+							this.desc +
+						"</div>" +
+						"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
+							this.dim +
+						"</div>" +
 						"<div class=\"line_separator\"></div>" +
 					"</div>" +
 				"</div>\n";
@@ -130,7 +142,14 @@ Comment.traiterResponseJSON = function(data){
 				new User(comment.author_id, comment.author_name) : 
 					environnement.users[comment.author_id];
 
-				obj = new Comment (comment.id, author,comment.text,comment.date, comment.score);
+				obj = new Comment (comment.id, 
+						author,
+						comment.text,
+						comment.date,
+						comment.score,
+						comment.price,
+						comment.desc,
+						comment.dim);
 				environnement.timeline.addComment(obj);
 
 	}
@@ -154,11 +173,18 @@ Comment.traiterResponseJSON = function(data){
 function insertCmt (form){
 	var user=environnement.actif;
 	var comment = encodeURIComponent(form.commentInput.value);
+	var price = encodeURIComponent(form.priceInput.value);
+	var desc = encodeURIComponent(form.descInput.value);
+	var dim = encodeURIComponent(form.dimInput.value);
+	
 	if( user != undefined){
 		$.ajax({
 			type: "GET",
 			data: 	"id="+ user.id+ 
 					"&cmt="+comment+
+					"&price="+price+
+					"&desc="+desc+
+					"&dim="+dim+
 					"&key="+environnement.key,
 			url: server_path + "addComment",
 			dataType: "json",

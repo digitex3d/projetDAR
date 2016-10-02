@@ -110,10 +110,18 @@
 								<div class="profile">
 									<div id="fullname"></div>
 									<div id="comment_insert_box">
+										<span>Ajouter un logement</span>
 										<form onsubmit="insertCmt(this)" action="javascript:"
 											id="insertCmtForm">
 											<input placeholder="Écrire un nouveau commentaire..."
 												name="commentInput" id="commentInput" class="textInput" />
+											<input placeholder="Prix..."
+												name="priceInput" id="priceInput" class="textInput" />
+											<input placeholder="Description..."
+												name="descInput" id="descInput" class="textInput" />
+											<input placeholder="Dimension (m²)..."
+												name="dimInput" id="dimInput" class="textInput" />
+											<input type="submit" value="Add">
 										</form>
 									</div>
 								</div>

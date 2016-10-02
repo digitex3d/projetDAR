@@ -52,6 +52,9 @@ public class AddComment extends HttpServlet{
 		// On récupère les paramètres
 		String authorid = request.getParameter("id");
 		String comment = request.getParameter("cmt");
+		String price = request.getParameter("price");
+		String desc = request.getParameter("desc");
+		String dim = request.getParameter("dim");
 		String key = request.getParameter("key");
 
 		// On ajoute le commentaire
@@ -67,7 +70,7 @@ public class AddComment extends HttpServlet{
 				return; 
 			}
 			
-			CommentsTools.addComment(Integer.parseInt(authorid), comment);
+			CommentsTools.addComment(Integer.parseInt(authorid), comment, price, desc, dim);
 
 			GeneralTools.serverLog(	"Commentaire id: " + authorid +
 					" cmt: " +comment + " ajouté");
