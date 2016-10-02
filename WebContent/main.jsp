@@ -106,14 +106,14 @@
 						<div id="left_panel">
 						<!-- ##################### DASHBOARD ##################### -->
 							<div id="dashboard" class="panel">
-								<h1>Dashboard</h1>
+								<h1>Jecoloc</h1>
 								<div class="profile">
 									<div id="fullname"></div>
 									<div id="comment_insert_box">
 										<span>Ajouter un logement</span>
 										<form onsubmit="insertCmt(this)" action="javascript:"
 											id="insertCmtForm">
-											<input placeholder="Écrire un nouveau commentaire..."
+											<input placeholder="Titre..."
 												name="commentInput" id="commentInput" class="textInput" />
 											<input placeholder="Prix..."
 												name="priceInput" id="priceInput" class="textInput" />
@@ -136,7 +136,7 @@
 					<td>
 					<!-- ##################### TIMELINE ##################### -->
 						<div id="timeline" class="panel">
-							<h1>Timeline</h1>
+							<h1>Logements</h1>
 							<div class="onlyFriends">
 								<label for="onlyFriends">Seulement amis</label> <input
 									type="checkbox" onclick='only_friends(this);' value="None"
