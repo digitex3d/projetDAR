@@ -16,6 +16,9 @@ import services.service.GeneralTools;
 /**
  * Cette classe initialise la base de données si c'est pas
  * encore fait.
+ * C'est une classe qui s'exécute au demarrage du serveur.
+ * 
+ * 
  * @author giuseppe
  *
  */
