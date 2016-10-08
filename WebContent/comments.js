@@ -7,6 +7,15 @@ function Timeline(){
 	this.size = 0;
 
 }
+// Renvoie un commentaire à partir de son id
+Timeline.prototype.getComment = function(id){
+	for (var i in this.comments)
+		if( this.comments[i].id == id)
+			return this.comments[i];
+
+	return null;
+	
+}
 
 //Ajoute un obj commentaire à la timeline
 Timeline.prototype.addComment = function(comment){
@@ -64,6 +73,36 @@ function Comment (id, author, text, date, score, prix, desc, dim) {
 }
 
 
+Comment.prototype.getExtHtml = function () {
+	var user = environnement.actif;
+	var cid = this.id;
+	
+	var resu = 	"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
+	"<div class=\"commentDiv\">" +
+		
+		"<h1 class=\"commentContent\">" +
+			this.text+
+		"</h1>" +
+		"<span class=\"commentDate\">" +
+			this.date+
+		"</span>" +
+		"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">Prix" +
+				this.prix +
+		"</div>" +
+		"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">Déscription" +
+			this.desc +
+		"</div>" +
+		"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">Dimension" +
+			this.dim +
+		"</div>" +
+		"<div class=\"line_separator\"></div>" +
+	"</div>" +
+"</div>\n";
+
+return resu.toString();
+	
+}
+
 
 //Retourne code html pour un commentaire
 Comment.prototype.getHtml = function() {
@@ -72,6 +111,7 @@ Comment.prototype.getHtml = function() {
 						"</span>";
 	var cid = this.id;
 	var like_button;
+
 
 	if( user != undefined ){
 		if(		!isFriend(this.author.id) &&
@@ -98,6 +138,8 @@ Comment.prototype.getHtml = function() {
 						"<span class=\"commentAuthor\">" +
 							this.author.login+
 						"</span>" +
+						"<a class=\"annonce_link\""+
+						" href=\" javascript: extItem('"+ cid +"'); \" >"+
 						"<span class=\"commentContent\">" +
 							this.text+
 						"</span>" +
@@ -116,7 +158,7 @@ Comment.prototype.getHtml = function() {
 						"</div>" +
 						"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
 							this.dim +
-						"</div>" +
+						"</div></a>" +
 						"<div class=\"line_separator\"></div>" +
 					"</div>" +
 				"</div>\n";
@@ -168,6 +210,17 @@ Comment.traiterResponseJSON = function(data){
 //############################ FIN COMMENT ###############################
 
 // ########################## INSERTION COMMENTAIRE ######################
+
+
+function extItem(cid){
+	var timeline=environnement.timeline;
+	var annonce = timeline.getComment(cid);
+	
+	$("#timeline").html(annonce.getExtHtml());
+	
+	
+};
+
 
 //Insère un commentaire dans la base de données
 function insertCmt (form){
