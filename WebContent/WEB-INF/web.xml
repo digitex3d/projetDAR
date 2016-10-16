@@ -3,9 +3,12 @@
   <servlet>
     <servlet-name>UploadImage</servlet-name>
     <servlet-class>servlet.UploadImage</servlet-class>
-    <url-pattern>/uploadimage</url-pattern>
   </servlet>
-   <servlet>
+  <servlet-mapping>
+    <servlet-name>UploadImage</servlet-name>
+    <url-pattern>/uploadimage</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>InitDB</servlet-name>
     <servlet-class>servlet.InitDB</servlet-class>
     <load-on-startup>1</load-on-startup>
@@ -18,7 +21,7 @@
     <servlet-name>Friends</servlet-name>
     <url-pattern>/friends</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>Like</servlet-name>
     <servlet-class>servlet.Like</servlet-class>
   </servlet>
@@ -66,11 +69,21 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-  <context-param> 
-    <description>Location to store uploaded file</description> 
-    <param-name>file-upload</param-name> 
+  <context-param>
+    <description>Location to store uploaded file</description>
+    <param-name>file-upload</param-name>
     <param-value>
-         WebContent/resources
-     </param-value> 
-</context-param> 
+			/home/giuseppe/workspace-sync/projetDAR/WebContent/resources/
+		</param-value>
+  </context-param>
+  <!--  Servlet for image downlading redirection from /imgs/* -->
+    <servlet>
+    <servlet-name>Images</servlet-name>
+    <servlet-class>servlet.redirect.Imgs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Images</servlet-name>
+    <url-pattern>/imgs/*</url-pattern>
+  </servlet-mapping>
+  <!--######################################################## -->
 </web-app>

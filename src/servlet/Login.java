@@ -57,9 +57,19 @@ public class Login extends HttpServlet{
 
 						GeneralTools.serverLog("Mot de pass bon.", this);
 						int id = AuthentificationTools.getIDUser(login);
-						String key =AuthentificationTools.
-								insertSession( id, false);
-						System.out.println("Connection de "+login+" reussiec clef:" + key);	     						          
+						
+						String key;
+						
+						// If the user hasn't an opened session
+						// Create a new session for the user
+						if( !AuthentificationTools.hasKey(id) )
+							key = AuthentificationTools.
+									insertSession( id, false);
+						
+						 else 
+							key = AuthentificationTools.getUserKey(id);
+
+						System.out.println("Connection de "+login+" reussiec clef:" + key);	     				          
 
 						JSONObject repobjs = new JSONObject();
 

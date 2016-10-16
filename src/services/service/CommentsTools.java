@@ -39,7 +39,9 @@ public class CommentsTools {
 	 */
 	public static void addComment(int authorid, String text, String price
 			, String desc
-			, String dim) throws UnknownHostException, MongoException{
+			, String dim
+			, String imgid
+			, String nbimg) throws UnknownHostException, MongoException{
 		Mongo m = DBStatic.getMongoConnection();
 		DB db = m.getDB(MDB_NAME);
 		DBCollection collection = db.getCollection("comments");
@@ -52,6 +54,8 @@ public class CommentsTools {
 		object.put("price", price);
 		object.put("desc", desc);
 		object.put("dim", dim);
+		object.put("imgid", imgid);
+		object.put("nbimg", nbimg);
 		LikeTools.userInitLikes(key);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

@@ -197,6 +197,76 @@ public class AuthentificationTools {
 	}
 	
 	/**
+	 * Test if an user has an already opened session.
+	 * @param id
+	 */
+	public static boolean hasKey(int id){
+		boolean resu = false;
+		
+		Connection conn= DBStatic.getMySQLConnection();
+		String query = "SELECT * FROM sessions WHERE id='"+id+"';";
+	
+		
+		try {
+			Statement inst = conn.createStatement();
+			inst.executeQuery(query);
+			ResultSet rs = inst.getResultSet();
+			if(rs.next())
+				resu = true;
+		
+			rs.close();
+			inst.close();
+			conn.close();
+			
+			return resu;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return resu;
+		
+	}
+	
+	/**
+	 * Get the key of the user 
+	 * @param id
+	 */
+	public static String getUserKey(int id){
+		String resu;
+		
+		if(!hasKey(id)) return null;
+		
+		Connection conn= DBStatic.getMySQLConnection();
+		String query = "SELECT * FROM sessions WHERE id='"+id+"';";
+	
+		
+		try {
+			Statement inst = conn.createStatement();
+			inst.executeQuery(query);
+			ResultSet rs = inst.getResultSet();
+			
+			if(rs.next())		resu = rs.getString(2);
+			else				resu = null;
+			
+		
+			rs.close();
+			inst.close();
+			conn.close();
+			
+			return resu;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+		
+	}
+	
+	/**
 	 * Insertion d'une clé de session dans la base MySql
 	 * @param id
 	 * @param root

@@ -5,8 +5,8 @@
 <head>
 <title>projetDAR</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- <link rel="stylesheet" type="text/css" href="main.css"> 
-<link rel="stylesheet" type="text/css" href="loading.css"> -->
+<link rel="stylesheet" type="text/css" href="main.css"> 
+<link rel="stylesheet" type="text/css" href="loading.css"> 
 </head>
 <body>
 	<!-- TOP MENU -->
@@ -112,15 +112,17 @@
 									<div id="comment_insert_box">
 										<span>Ajouter un logement</span>
 										<form onsubmit="insertCmt(this)" action="javascript:"
-											id="insertCmtForm">
+											id="insertCmtForm"   enctype="multipart/form-data">
 											<input placeholder="Titre..."
-												name="commentInput" id="commentInput" class="textInput" />
+												name="commentInput" id="cmt" class="textInput" />
 											<input placeholder="Prix..."
-												name="priceInput" id="priceInput" class="textInput" />
+												name="priceInput" id="price" class="textInput" />
 											<input placeholder="Description..."
-												name="descInput" id="descInput" class="textInput" />
+												name="descInput" id="desc" class="textInput" />
 											<input placeholder="Dimension (m²)..."
-												name="dimInput" id="dimInput" class="textInput" />
+												name="dimInput" id="dim" class="textInput" />
+											<input type="file" 
+												name="image" id="imageSelect" size="50" multiple/>
 											<input type="submit" value="Add">
 										</form>
 									</div>
@@ -161,16 +163,21 @@
 	<script type="text/javascript" src="errors.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="main.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
 
 	<!-- main script -->
 	<script type="text/javascript">
+	<% String filepath= application.getContextPath();
+		out.println("var imagepath=\""+filepath+"\";");%>
 		$(document)
 				.ready(
+			
+				
 						function() {
 	<%String id = request.getParameter("id");
 			String login = request.getParameter("login");
 			String key = request.getParameter("key");
-
+			
 			if ((id != null) && (login != null) && (key != null)) {
 				out.println("main('" + id + "','" + login + "','" + key + "');");
 
@@ -178,7 +185,13 @@
 				out.println("main();");
 
 			}%>
+			
+			// Add an event handler ont the file input change.
+			$("#imageSelect").change(uploadImage);
+
 		});
+		
+		
 	</script>
 
 </body>

@@ -20,6 +20,8 @@ function main(id, login, key) {
 	environnement.friendsList = new FriendsList();
 	// Liste des likes
 	environnement.likesList = new LikesList();
+	// Images temporaires
+	environnement.images = {};
 	
 	if( ( id != null) && 
 		(login!=null) &&
@@ -131,8 +133,8 @@ function validateForm(){
 		
 	}
 
-
 }
+
 
 //################################### FIN GESTION ########################################
 

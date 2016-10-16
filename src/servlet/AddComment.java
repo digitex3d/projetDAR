@@ -56,6 +56,10 @@ public class AddComment extends HttpServlet{
 		String desc = request.getParameter("desc");
 		String dim = request.getParameter("dim");
 		String key = request.getParameter("key");
+		String imgid = request.getParameter("imgid");
+		String nbimg = request.getParameter("nbimg");
+		
+		System.out.println(authorid);
 
 		// On ajoute le commentaire
 		if(comment != null && !comment.equals("null") &&
@@ -70,7 +74,7 @@ public class AddComment extends HttpServlet{
 				return; 
 			}
 			
-			CommentsTools.addComment(Integer.parseInt(authorid), comment, price, desc, dim);
+			CommentsTools.addComment(Integer.parseInt(authorid), comment, price, desc, dim, imgid, nbimg);
 
 			GeneralTools.serverLog(	"Commentaire id: " + authorid +
 					" cmt: " +comment + " ajouté");

@@ -8,17 +8,22 @@ import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.*;
 import org.apache.commons.fileupload.disk.*;
 import org.apache.commons.fileupload.servlet.*;
-import org.apache.commons.io.output.*;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import services.service.GeneralTools;
+import services.service.ServiceTools;
 
 /**
- * Servlet implementation class UploadImage
+ * Cette classe reçois des images en paramètre, elle les sauvegarde 
+ * dans le dossier spécifié dans la configuration et il réponds avec un
+ * objet json qui contient le nombre des images chargés et leur enplacement. 
  */
 public class UploadImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,78 +51,85 @@ public class UploadImage extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		File file ;
-		   int maxFileSize = 5000 * 1024;
-		   int maxMemSize = 5000 * 1024;
-
-		   // Verify the content type
-		   String contentType = request.getContentType();
-		   if ((contentType.indexOf("multipart/form-data") >= 0)) {
-
-		      DiskFileItemFactory factory = new DiskFileItemFactory();
-		      // maximum size that will be stored in memory
-		      factory.setSizeThreshold(maxMemSize);
-		      // Location to save data that is larger than maxMemSize.
-		      factory.setRepository(new File("\temp"));
-
-		      // Create a new file upload handler
-		      ServletFileUpload upload = new ServletFileUpload(factory);
-		      // maximum file size to be uploaded.
-		      upload.setSizeMax( maxFileSize );
-		      try{ 
-		         // Parse the request to get file items.
-		         List<FileItem> fileItems = upload.parseRequest(request);
-
-		         // Process the uploaded file items
-		         Iterator<FileItem> i = fileItems.iterator();
-
-		         out.println("<html>");
-		         out.println("<head>");
-		         out.println("<title>JSP File upload</title>");  
-		         out.println("</head>");
-		         out.println("<body>");
-		         while ( i.hasNext () ) 
-		         {
-		            FileItem fi = (FileItem)i.next();
-		            if ( !fi.isFormField () )	
-		            {
-		            // Get the uploaded file parameters
-		            String fieldName = fi.getFieldName();
-		            String fileName = fi.getName();
-		            boolean isInMemory = fi.isInMemory();
-		            long sizeInBytes = fi.getSize();
-		            // Write the file
-		            if( fileName.lastIndexOf("\\") >= 0 ){
-		            file = new File( filePath + 
-		            fileName.substring( fileName.lastIndexOf("\\"))) ;
-		            }else{
-		            file = new File( filePath + 
-		            fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-		            }
-		            fi.write( file ) ;
-		            out.println("Uploaded Filename: " + filePath + 
-		            fileName + "<br>");
-		            }
-		         }
-		         out.println("</body>");
-		         out.println("</html>");
-		      }catch(Exception ex) {
-		         System.out.println(ex);
-		      }
-		   }else{
-		      out.println("<html>");
-		      out.println("<head>");
-		      out.println("<title>Servlet upload</title>");  
-		      out.println("</head>");
-		      out.println("<body>");
-		      out.println("<p>No file uploaded</p>"); 
-		      out.println("</body>");
-		      out.println("</html>");
-		   }
 		
-		doGet(request, response);
+		// L'id qui identifie le logement qu'on est en train d'ajouter d'une façon temporaire.
+		String imgid = ServiceTools.generateRandomKey();
+		boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
+		
+		if(imgid == null || !isMultipartContent){
+			GeneralTools.serverLog("Erreur de chargement de l'image.");
+			try {
+				out.write( new JSONObject().
+						put("error", "Erreur de chargement de l'image.").toString());
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+
+			}
+
+			return;
+		}
+		
+		int nb=0;
+		
+		FileItemFactory factory = new DiskFileItemFactory();
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		
+		try {
+			List<FileItem> fields = upload.parseRequest(request);
+			Iterator<FileItem> it = fields.iterator();
+			
+			if (!it.hasNext()) {
+				GeneralTools.serverLog("Erreur de chargement de l'image.");
+				try {
+					out.write( new JSONObject().
+							put("error", "Erreur de chargement de l'image.").toString());
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+
+				}
+				return;
+			}
+
+			
+			
+			
+			// On parcourt la liste des images
+			while (it.hasNext()) {
+				FileItem fileItem = it.next();
+				
+				//TODO: Change to a default path.
+				File newFile = new File(filePath, imgid+nb+".png");
+
+				try {
+					fileItem.write(newFile);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				
+				}
+				
+				nb++;
+				
+			}
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			JSONObject resu = new JSONObject();
+			resu.put("imgid", imgid);
+			resu.put("nbimg", nb);
+			out.write( resu.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
