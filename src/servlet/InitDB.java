@@ -2,6 +2,7 @@ package servlet;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 
@@ -29,6 +30,13 @@ public class InitDB extends HttpServlet{
 		this.conn = DBStatic.getMySQLConnection();
 		this.initLoginTable();
 		this.initSessionsTable();
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
     }
 	
@@ -61,8 +69,7 @@ public class InitDB extends HttpServlet{
 					GeneralTools.serverLog("Impossible de créer la table 'login'\n", this, Level.SEVERE);
 				
 			}
-			
-			conn.close();
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			
@@ -98,7 +105,7 @@ public class InitDB extends HttpServlet{
 				
 			}
 			
-			conn.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
