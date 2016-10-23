@@ -164,6 +164,9 @@
 	<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="main.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
+	
+	<!-- This script contains tools that helps with the generation of HTML code  -->
+	<script type="text/javascript" src="HTMLTools.js" charset="UTF-8"></script>
 
 	<!-- main script -->
 	<script type="text/javascript">

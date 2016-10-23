@@ -79,35 +79,49 @@ Comment.prototype.getExtHtml = function () {
 	var user = environnement.actif;
 	var cid = this.id;
 	
-	resu+= this.getImagesDiv(cid);
 	
-	var resu = 	"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
-	"<div class=\"commentDiv\">" +
-		
+	
+	var description = 
+	
+		"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">" +
+				"<p class='prix'>Prix:"
+				+this.prix + "€</p>" +
+		"</div>" +
+		"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
+				"<p class='description'>Déscription:" +
+				this.desc +"</p>" +
+		"</div>" +
+		"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
+				"<p class='dimension'>Dimension:" +
+				this.dim + "m²</p>"+
+		"</div>";
+	
+	var resu = 	
+		"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
+		// Title
 		"<h1 class=\"commentContent\">" +
-			this.text+
+		this.text+
 		"</h1>" +
-		"<span class=\"commentDate\">" +
-			this.date+
-		"</span>" +
-		"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">Prix" +
-				this.prix +
+		
+		// date
+		"<div class=\"commentDate\">" +
+		this.date+
 		"</div>" +
-		"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">Déscription" +
-			this.desc +
-		"</div>" +
-		"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">Dimension" +
-			this.dim +
-		"</div>" +
-		"<div class=\"line_separator\"></div>" +
-	"</div>" +
-"</div>\n";
+
+		// Images
+		this.getImagesDiv(false) +
+
+		// Description
+		genHTMLtag("div", "description-containter_"+cid, "description", description)
+		+
+		"</div>\n"+
+		"<div class=\"line_separator\"></div>";
 
 return resu.toString();
 	
 }
 
-Comment.prototype.getImagesDiv = function() {
+Comment.prototype.getImagesDiv = function(onlyFirst) {
 	var cid = this.id;
 	// Retrieve the current server path 
 	var locimagePath = imagepath+"/imgs/"+this.imgid;
@@ -116,12 +130,21 @@ Comment.prototype.getImagesDiv = function() {
 	var imagesDivHTML = 
 		"<div class='imagescontainer' id='imagecontainer_" + cid + "'>";
 	
-	for( var i = 0; i < this.nbimg; i ++){
-		imagesDivHTML += "<div class='image' id='image_"+cid+i+"'>"+
-		"<img src='"+locimagePath+i+".png?width=200&height=200"+"'></img>"+
+	if( !onlyFirst ){
+		for( var i = 0; i < this.nbimg; i ++){
+			imagesDivHTML += "<div class='imageAnnonce' id='image_"+cid+i+"'>"+
+			"<img src='"+locimagePath+i+".png?width=200&height=200"+"'></img>"+
+			"</div>";
+			
+		}
+		
+	} else {
+		imagesDivHTML += "<div class='image' id='image_"+cid+"0'>"+
+		"<img src='"+locimagePath+"0.png?width=200&height=200"+"'></img>"+
 		"</div>";
 		
 	}
+	
 	
 	imagesDivHTML += "</div>";
 	
@@ -166,7 +189,7 @@ Comment.prototype.getHtml = function() {
 	var resu = 	"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
 					"<div class=\"commentDiv\">" +
 						add_button+
-						this.getImagesDiv(cid)
+						this.getImagesDiv(true)
 						+
 						"<span class=\"commentAuthor\">" +
 							this.author.login+
@@ -175,7 +198,7 @@ Comment.prototype.getHtml = function() {
 						" href=\" javascript: extItem('"+ cid +"'); \" >"+
 						"<span class=\"commentContent\">" +
 							this.text+
-						"</span>" +
+						"</span>" + "</a>" +
 						"<span class=\"commentDate\">" +
 							this.date+
 						"</span>" +
@@ -191,7 +214,7 @@ Comment.prototype.getHtml = function() {
 						"</div>" +
 						"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
 							this.dim +
-						"</div></a>" +
+						"</div>" +
 						"<div class=\"line_separator\"></div>" +
 					"</div>" +
 				"</div>\n";
