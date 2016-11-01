@@ -108,6 +108,7 @@ function  updateLikes(){
 	if(user != undefined &&
 			environnement.timeline.comments.size != 0){
 		for (var comment_id in likes) {
+			colocNamesHTML = "";
 			var like_ids = likes[comment_id];
 			for ( var user_id in like_ids ){
 				var cuser = users[like_ids[user_id]];
