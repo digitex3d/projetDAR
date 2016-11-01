@@ -80,12 +80,10 @@ Comment.prototype.getExtHtml = function () {
 	var cid = this.id;
 	
 	if(!isColoc(cid)){
-		coloc_button = "<a href=\"javascript:coloc('"+cid+"')\">Propose colocation</a>";
+		coloc_button = "<a id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">Propose colocation</a>";
 	}else{
-		coloc_button =  "<a href=\"javascript:coloc('"+cid+"')\">Enlève proposition colocation</a>";
+		coloc_button =  "<a id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">Enlève proposition colocation</a>";
 	}
-	
-	
 	
 	var description = 
 	
@@ -120,9 +118,10 @@ Comment.prototype.getExtHtml = function () {
 		// Description
 		genHTMLtag("div", "description-containter_"+cid, "description", description)
 		+
-		// Colocataires
-		"<div class=\"colocataires\">"+	
 		coloc_button+
+		// Colocataires
+		"<div class=\"colocataires\"><p>Colocataires</p>"+	
+	
 		"<span  id=\"coloc_names_" + cid +"\"> </span>"+
 		"</div>" +
 		
@@ -278,6 +277,10 @@ function extItem(cid){
 	var annonce = timeline.getComment(cid);
 	
 	$("#timeline").html(annonce.getExtHtml());
+	
+	// Afficher les colocataires
+	//TODO: changer nom
+	updateLikes();
 	
 	
 };
