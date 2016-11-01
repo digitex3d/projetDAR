@@ -79,6 +79,12 @@ Comment.prototype.getExtHtml = function () {
 	var user = environnement.actif;
 	var cid = this.id;
 	
+	if(!isColoc(cid)){
+		coloc_button = "<a href=\"javascript:coloc('"+cid+"')\">Propose colocation</a>";
+	}else{
+		coloc_button =  "<a href=\"javascript:coloc('"+cid+"')\">Enlève proposition colocation</a>";
+	}
+	
 	
 	
 	var description = 
@@ -114,6 +120,12 @@ Comment.prototype.getExtHtml = function () {
 		// Description
 		genHTMLtag("div", "description-containter_"+cid, "description", description)
 		+
+		// Colocataires
+		"<div class=\"colocataires\">"+	
+		coloc_button+
+		"<span  id=\"coloc_names_" + cid +"\"> </span>"+
+		"</div>" +
+		
 		"</div>\n"+
 		"<div class=\"line_separator\"></div>";
 
@@ -175,12 +187,7 @@ Comment.prototype.getHtml = function() {
 
 	}
 
-	if(!isLiked(cid)){
-		like_button = "<img src=\"like.png\" onClick=\"like('"+cid+"');\"></img>";
-	}else{
-		like_button = "<img src=\"unlike.png\" onClick=\"like('"+cid+"');\"></img>";
-	}
-	
+
 	
 	
 	
@@ -202,10 +209,6 @@ Comment.prototype.getHtml = function() {
 						"<span class=\"commentDate\">" +
 							this.date+
 						"</span>" +
-							"<div class=\"likes\">"+	
-								like_button+
-								"<span  id=\"likes_number_" + cid +"\"> </span>"+
-							"</div>" +
 						"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">" +
 								this.prix +
 						"</div>" +

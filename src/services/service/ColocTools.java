@@ -29,7 +29,7 @@ public class ColocTools {
 public static final String MDB_NAME = "dar";
 	
 	/*
-	 * Ajoute un ami dans le tableau "friends" de la base de données
+	 * Ajoute un colocataire dans le tableau "colocs" de la base de données
 	 */
 	public static boolean coloc(String userId, String commentId) throws UnknownHostException, MongoException{
 		Mongo m = DBStatic.getMongoConnection();

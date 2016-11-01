@@ -27,7 +27,7 @@ function likes(){
 /*
  * Fonction qui fait une requête pour ajouter une coloc
  */
-function like(comment_id){
+function coloc(comment_id){
 	var user=environnement.actif;
 	if( user != undefined){
 	    $.ajax({
@@ -101,21 +101,29 @@ LikesList.traiterResponseJSON = function(data){
 // fonction qui met à jour le nombre des likes
 function  updateLikes(){
 	var user=environnement.actif;
+	var users = environnement.users;
 	var likes = environnement.likesList.likes;
-
+	var colocNamesHTML = "";
+	
 	if(user != undefined &&
 			environnement.timeline.comments.size != 0){
 		for (var comment_id in likes) {
 			var like_ids = likes[comment_id];
-			var nb = like_ids.length;
-			$("#likes_number_"+ comment_id).html(nb);
+			for ( var user_id in like_ids ){
+				var cuser = users[like_ids[user_id]];
+				if( cuser )
+					colocNamesHTML += "<p>" + cuser.login + "</p>"; 
+				
+			}
+				var nb = like_ids.length;
+			$("#coloc_names_"+ comment_id).html(colocNamesHTML);
 
 		}
 	}
 }
 
 // Retourne true si liked false sinon
-function isLiked(comment_id){
+function isColoc(comment_id){
 	var user = environnement.actif;
 	var likes = environnement.likesList.likes;
 
