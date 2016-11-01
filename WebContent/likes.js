@@ -2,7 +2,7 @@
  * ################################# LIKES ##############################################
  */
 
-//Fonction qui initialise les likes
+//Fonction qui initialise les colocs
 function likes(){
 	var user=environnement.actif;
 	if( user != undefined){
@@ -12,7 +12,7 @@ function likes(){
 	       	   			"&userId=none"+
 	          			"&commentId=none"+
 	          			"&key="+environnement.key,
-	          url: server_path + "like",
+	          url: server_path + "coloc",
 	          dataType: "json",
 	          scriptCharset: "utf-8" ,
 	          success: LikesList.traiterResponseJSON ,
@@ -25,7 +25,7 @@ function likes(){
 }
 
 /*
- * Fonction qui fait une requête pour ajouter un like
+ * Fonction qui fait une requête pour ajouter une coloc
  */
 function like(comment_id){
 	var user=environnement.actif;
@@ -36,7 +36,7 @@ function like(comment_id){
 	        	   		"&userId="+ user.id+ 
 	           			"&commentId="+comment_id+
 	           			"&key="+environnement.key,
-	           url: server_path + "like",
+	           url: server_path + "coloc",
 	           dataType: "json",
 	           scriptCharset: "utf-8" ,
 	           success: traiteReponseAddLike,
@@ -47,7 +47,7 @@ function like(comment_id){
 	}
 }
 
-// Ajoute un like
+// Ajoute une coloc
 function traiteReponseAddLike(data){
 	   if (data.error != undefined) {
 	    	 fonc_erreur(null , data.error);
@@ -59,7 +59,7 @@ function traiteReponseAddLike(data){
 	   
 }
 
-// ######################### LIKES LIST #############################
+// ######################### Colocation LIST #############################
 /*
  * Class qui contient une liste de likes
  */

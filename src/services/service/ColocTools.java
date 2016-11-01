@@ -25,13 +25,13 @@ import database.DBStatic;
  * 
  *
  */
-public class LikeTools {
+public class ColocTools {
 public static final String MDB_NAME = "dar";
 	
 	/*
 	 * Ajoute un ami dans le tableau "friends" de la base de données
 	 */
-	public static boolean like(String userId, String commentId) throws UnknownHostException, MongoException{
+	public static boolean coloc(String userId, String commentId) throws UnknownHostException, MongoException{
 		Mongo m = DBStatic.getMongoConnection();
 		DB db = m.getDB(MDB_NAME);
 		DBCollection collection = db.getCollection("likes");
@@ -81,7 +81,7 @@ public static final String MDB_NAME = "dar";
 	
 	
 	//Fonction qui initialise le tableau des amis
-	public static void userInitLikes(String comment_id) throws UnknownHostException, MongoException{
+	public static void userInitColocs(String comment_id) throws UnknownHostException, MongoException{
 		Mongo m = DBStatic.getMongoConnection();
 		DB db = m.getDB(MDB_NAME);
 		DBCollection collection = db.getCollection("likes");
@@ -89,7 +89,7 @@ public static final String MDB_NAME = "dar";
 		resu.put("id", comment_id);
 		resu.put("likes", new ArrayList<String>());
 	
-		GeneralTools.serverLog("Likes de " + comment_id + " initialisé");
+		GeneralTools.serverLog("Colocs de " + comment_id + " initialisé");
 		collection.insert(resu);
 		m.close();
 		
@@ -98,7 +98,7 @@ public static final String MDB_NAME = "dar";
 	/*
 	 * Retourne une liste avec les likes
 	 */
-	public static  JSONArray getLikes() throws UnknownHostException, MongoException{
+	public static  JSONArray getColocs() throws UnknownHostException, MongoException{
 		Mongo m = DBStatic.getMongoConnection();
 		DB db = m.getDB(MDB_NAME);
 		DBCursor cursor;

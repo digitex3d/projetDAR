@@ -4,6 +4,7 @@
 
 <head>
 <title>projetDAR</title>
+ <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="main.css"> 
 <link rel="stylesheet" type="text/css" href="loading.css"> 
@@ -123,16 +124,24 @@
 												name="dimInput" id="dim" class="textInput" />
 											<input type="file" 
 												name="image" id="imageSelect" size="50" multiple/>
-											<input type="submit" value="Add">
+											<input placeholder="Adresse..."
+												name="adresseInput" id="adresse" class="textInput" />
+											<input id="submit" type="submit" value="Add">
+											<div id="map"></div>
 										</form>
+								
 									</div>
 								</div>
+								
+									
 							</div>
 							<div id="friends_box" class="panel">
 								<h1>Amis</h1>
 								<div id="nb_amis"></div>
 								<div id="friends_list"></div>
 							</div>
+						
+  
 						</div>
 					</td>
 					<td>
@@ -164,10 +173,19 @@
 	<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="main.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
+	<!-- Google maps outils -->
+	
+	<script type="text/javascript" src="gmaps.js" charset="UTF-8"></script>
+	<!-- Google maps API -->
+	<script async defer 
+	src="https://maps.googleapis.com/maps/api/js?
+			key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4&callback=initMap">
+	</script>
 	
 	<!-- This script contains tools that helps with the generation of HTML code  -->
 	<script type="text/javascript" src="HTMLTools.js" charset="UTF-8"></script>
 
+	
 	<!-- main script -->
 	<script type="text/javascript">
 	<% String filepath= application.getContextPath();

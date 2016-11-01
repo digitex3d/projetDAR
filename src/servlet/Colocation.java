@@ -18,10 +18,10 @@ import com.mongodb.MongoException;
 
 import services.auth.AuthentificationTools;
 import services.service.GeneralTools;
-import services.service.LikeTools;
+import services.service.ColocTools;
 
 @SuppressWarnings("serial")
-public class Like extends HttpServlet{
+public class Colocation extends HttpServlet{
 	@Override
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response)
@@ -75,17 +75,17 @@ public class Like extends HttpServlet{
 
 			switch( mode_int){
 			case 0:
-				out.write( new JSONObject().put("liked", like(userId , commentId, out ) ).toString());
+				out.write( new JSONObject().put("liked", coloc(userId , commentId, out ) ).toString());
 				break;
 			case 1:
-				out.write( getLikes(out).toString());
+				out.write( getColocs(out).toString());
 				break;
 
 			}
 		}else{
-			GeneralTools.serverLog("Erreur d'insertion du like, vérifier paramètres", this);
+			GeneralTools.serverLog("Erreur d'insertion du colocataire, vérifier paramètres", this);
 			try {
-				out.write( new JSONObject().put("error", "Erreur d'insertion du like, vérifier paramètres").toString());
+				out.write( new JSONObject().put("error", "Erreur d'insertion du colocataire, vérifier paramètres").toString());
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -98,10 +98,10 @@ public class Like extends HttpServlet{
 	/*
 	 * Methode statique qui récupère la liste des amis 
 	 */
-	public static JSONArray getLikes(PrintWriter out ) throws JSONException{
+	public static JSONArray getColocs(PrintWriter out ) throws JSONException{
 		JSONArray resu = new JSONArray();
 		try{
-			resu = LikeTools.getLikes();
+			resu = ColocTools.getColocs();
 
 		}catch (UnknownHostException e){
 			out.write( new JSONObject().put("error", "Erreur du serveur, " + e.getMessage()).toString());
@@ -117,10 +117,10 @@ public class Like extends HttpServlet{
 	/*
 	 * Methode statique qui récupère la liste des amis 
 	 */
-	public static boolean like(String userId , String commentId ,PrintWriter out ) throws JSONException{
+	public static boolean coloc(String userId , String commentId ,PrintWriter out ) throws JSONException{
 		boolean resu= false;
 		try{
-			resu = LikeTools.like(userId, commentId);
+			resu = ColocTools.coloc(userId, commentId);
 
 		}catch (UnknownHostException e){
 			out.write( new JSONObject().put("error", "Erreur d'insertion du like, " + e.getMessage()).toString());

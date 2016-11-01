@@ -56,7 +56,7 @@ public class CommentsTools {
 		object.put("dim", dim);
 		object.put("imgid", imgid);
 		object.put("nbimg", nbimg);
-		LikeTools.userInitLikes(key);
+		ColocTools.userInitColocs(key);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date today = new Date();

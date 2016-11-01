@@ -22,12 +22,12 @@
     <url-pattern>/friends</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Like</servlet-name>
-    <servlet-class>servlet.Like</servlet-class>
+    <servlet-name>Colocation</servlet-name>
+    <servlet-class>servlet.Colocation</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Like</servlet-name>
-    <url-pattern>/like</url-pattern>
+    <servlet-name>Colocation</servlet-name>
+    <url-pattern>/coloc</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Search</servlet-name>

@@ -15,6 +15,12 @@
 	width: 100%;
 }
 
+/* Google maps */
+
+#map {
+        height: 200px;
+        width: 200px;
+     }
 
 .header  {
 	background: #6db3f2; /* Old browsers */
