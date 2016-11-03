@@ -110,27 +110,9 @@
 								<h1>Jecoloc</h1>
 								<div class="profile">
 									<div id="fullname"></div>
-									<div id="comment_insert_box">
-										<span>Ajouter un logement</span>
-										<form onsubmit="insertCmt(this)" action="javascript:"
-											id="insertCmtForm"   enctype="multipart/form-data">
-											<input placeholder="Titre..."
-												name="commentInput" id="cmt" class="textInput" />
-											<input placeholder="Prix..."
-												name="priceInput" id="price" class="textInput" />
-											<input placeholder="Description..."
-												name="descInput" id="desc" class="textInput" />
-											<input placeholder="Dimension (m²)..."
-												name="dimInput" id="dim" class="textInput" />
-											<input type="file" 
-												name="image" id="imageSelect" size="50" multiple/>
-											<input placeholder="Adresse..."
-												name="adresseInput" id="adresse" class="textInput" />
-											<input id="submit" type="submit" value="Add">
-											<div id="map"></div>
-										</form>
-								
-									</div>
+									<a href="javascript: ajouterUnLogementPage()">
+									Ajouter un logement
+									</a>
 								</div>
 								
 									
@@ -172,19 +154,16 @@
 	<script type="text/javascript" src="errors.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="main.js" charset="UTF-8"></script>
+	<script async defer type="text/javascript" src="gmaps.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
 	<!-- Google maps outils -->
-	
-	<script type="text/javascript" src="gmaps.js" charset="UTF-8"></script>
 	<!-- Google maps API -->
-	<script async defer 
-	src="https://maps.googleapis.com/maps/api/js?
-			key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4&callback=initMap">
-	</script>
+	
+
 	
 	<!-- This script contains tools that helps with the generation of HTML code  -->
 	<script type="text/javascript" src="HTMLTools.js" charset="UTF-8"></script>
-
+	<script type="text/javascript" src="js/ajouterLogement.js" charset="UTF-8"></script>
 	
 	<!-- main script -->
 	<script type="text/javascript">
