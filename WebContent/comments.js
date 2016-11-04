@@ -52,7 +52,7 @@ Timeline.prototype.getHtml = function(){
 
 //############################ COMMENT ###############################
 
-function Comment (id, author, text, date, score, prix, desc, dim, imgid, nbimg) {
+function Comment (id, author, text, date, score, prix, desc, dim, imgid, nbimg, lat, lng, addr) {
 	this.id=id;
 	this.author=author;
 	this.text=text;
@@ -63,6 +63,9 @@ function Comment (id, author, text, date, score, prix, desc, dim, imgid, nbimg) 
 	this.dim=dim;
 	this.imgid=imgid;
 	this.nbimg=nbimg;
+	this.lat=lat;
+	this.lng=lng;
+	this.addr=addr;
 
 	if (score == undefined) {
 		this.score=0;
@@ -251,7 +254,10 @@ Comment.traiterResponseJSON = function(data){
 						comment.desc,
 						comment.dim,
 						comment.imgid,
-						comment.nbimg);
+						comment.nbimg,
+						comment.lat,
+						comment.lng,
+						comment.addr);
 				environnement.timeline.addComment(obj);
 
 	}

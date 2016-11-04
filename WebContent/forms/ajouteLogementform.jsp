@@ -12,6 +12,9 @@
 			<input placeholder="Description..."
 			name="descInput" id="desc" class="textInput" />
 			
+			<input placeholder="Dimension(m²)..."
+			name="dimInput" id="dim" class="textInput" />
+			
 			<input type="file" name="image"			id="imageSelect" size="50" multiple /> 
 		 	<input	placeholder="Adresse..." 
 		 			name="adressInput" 
