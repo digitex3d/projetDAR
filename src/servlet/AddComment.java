@@ -58,6 +58,9 @@ public class AddComment extends HttpServlet{
 		String key = request.getParameter("key");
 		String imgid = request.getParameter("imgid");
 		String nbimg = request.getParameter("nbimg");
+		String lat = request.getParameter("lat");
+		String lng = request.getParameter("lng");
+		String addr = request.getParameter("addr");
 		
 		System.out.println(authorid);
 
@@ -74,7 +77,7 @@ public class AddComment extends HttpServlet{
 				return; 
 			}
 			
-			CommentsTools.addComment(Integer.parseInt(authorid), comment, price, desc, dim, imgid, nbimg);
+			CommentsTools.addComment(Integer.parseInt(authorid), comment, price, desc, dim, imgid, nbimg, lat, lng, addr);
 
 			GeneralTools.serverLog(	"Commentaire id: " + authorid +
 					" cmt: " +comment + " ajouté");

@@ -293,6 +293,9 @@ function insertCmt (form){
 	var price = encodeURIComponent(form.priceInput.value);
 	var desc = encodeURIComponent(form.descInput.value);
 	var dim = encodeURIComponent(form.dimInput.value);
+	var lat = marker.getPosition().lat();
+	var lng = marker.getPosition().lng();
+	var addr = encodeURIComponent(form.adressInput.value);
 	
 	// Convert form to formData type
 	//var formData = new FormData();
@@ -302,9 +305,13 @@ function insertCmt (form){
 			"cmt": comment, 
 			"price": price, 
 			"desc": desc,  
-			"dim": dim,  
+			"dim": dim,
+			"addr": addr,
 			"imgid": environnement.images.imgid,
 			"nbimg": environnement.images.nbimg,
+			"lat" : lat, 
+			"lng": lng,
+			
 	}
 	
 	

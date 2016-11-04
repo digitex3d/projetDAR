@@ -41,7 +41,10 @@ public class CommentsTools {
 			, String desc
 			, String dim
 			, String imgid
-			, String nbimg) throws UnknownHostException, MongoException{
+			, String nbimg
+			, String lat
+			, String lng
+			, String addr) throws UnknownHostException, MongoException{
 		Mongo m = DBStatic.getMongoConnection();
 		DB db = m.getDB(MDB_NAME);
 		DBCollection collection = db.getCollection("comments");
@@ -56,6 +59,9 @@ public class CommentsTools {
 		object.put("dim", dim);
 		object.put("imgid", imgid);
 		object.put("nbimg", nbimg);
+		object.put("lat", lat);
+		object.put("lng", lng);
+		object.put("addr", addr);
 		ColocTools.userInitColocs(key);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
