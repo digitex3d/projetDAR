@@ -34,6 +34,9 @@
 
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?
-			key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4&callback=initMap">
+			key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4&callback=initMap&libraries=places">
 	
 	</script>
+	
+
+

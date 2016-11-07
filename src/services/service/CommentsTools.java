@@ -86,8 +86,12 @@ public class CommentsTools {
 		DBCursor cursor;
 		DBCollection collection = db.getCollection("comments");
 		
-		DBObject quoteQuery = QueryBuilder.start("text").is(Pattern.compile(query, 
-                    Pattern.CASE_INSENSITIVE)).get();
+	    DBObject quoteQuery = QueryBuilder.start()
+	            .or(new QueryBuilder().start().put("text").is(Pattern.compile(query, Pattern.CASE_INSENSITIVE)).get(),
+	                new QueryBuilder().start().put("desc").is(Pattern.compile(query, Pattern.CASE_INSENSITIVE)).get()).get();
+		
+//		DBObject quoteQuery = QueryBuilder.start("text").is(Pattern.compile(query, 
+//                    Pattern.CASE_INSENSITIVE)).get();
 		cursor = collection.find(quoteQuery);
 			
 

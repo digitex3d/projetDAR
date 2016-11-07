@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +44,7 @@ public class Login extends HttpServlet{
 
 	protected void processRequest(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException, JSONException{
-
+		HttpSession session=request.getSession();
 		PrintWriter out = response.getWriter(); 
 
 		// On sauvegarde les paramètres
@@ -72,11 +74,19 @@ public class Login extends HttpServlet{
 						System.out.println("Connection de "+login+" reussiec clef:" + key);	     				          
 
 						JSONObject repobjs = new JSONObject();
+						
+						// Cookie de session
+						Cookie cookieId = new Cookie("session_key", key);
+						cookieId.setMaxAge(60*24*15);
+						session.setAttribute("session_key", key);
+						session.setAttribute("id", Integer.toString(id));
+						session.setAttribute("login", login);
+						response.addCookie(cookieId);
+						
 
-
-						repobjs.put("id", Integer.toString(id));
+						/*repobjs.put("id", Integer.toString(id));
 						repobjs.put("login", login);
-						repobjs.put("key", key);
+						repobjs.put("key", key);*/
 
 						out.write(repobjs.toString());
 

@@ -144,6 +144,15 @@ Comment.prototype.getImagesDiv = function(onlyFirst) {
 	var imagesDivHTML = 
 		"<div class='imagescontainer' id='imagecontainer_" + cid + "'>";
 	
+	if( this.imgid == null ){
+		imagesDivHTML += "<div class='imageAnnonce' id='image_"+cid+"0'>"+
+		"<img src='house-icon.png' width='200' height='200'></img>"+
+		"</div></div>";
+		
+		return imagesDivHTML;
+		
+	}
+	
 	if( !onlyFirst ){
 		for( var i = 0; i < this.nbimg; i ++){
 			imagesDivHTML += "<div class='imageAnnonce' id='image_"+cid+i+"'>"+
@@ -153,7 +162,7 @@ Comment.prototype.getImagesDiv = function(onlyFirst) {
 		}
 		
 	} else {
-		imagesDivHTML += "<div class='image' id='image_"+cid+"0'>"+
+		imagesDivHTML += "<div class='imageAnnonce' id='image_"+cid+"0'>"+
 		"<img src='"+locimagePath+"0.png?width=200&height=200"+"'></img>"+
 		"</div>";
 		
@@ -166,7 +175,7 @@ Comment.prototype.getImagesDiv = function(onlyFirst) {
 	return imagesDivHTML;
 }
 
-//Retourne code html pour un commentaire
+//Retourne code html pour un logement
 Comment.prototype.getHtml = function() {
 	var user=environnement.actif;
 	var add_button = "<span class=\"friendAdd\">" +
@@ -197,9 +206,14 @@ Comment.prototype.getHtml = function() {
 	
 	var resu = 	"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
 					"<div class=\"commentDiv\">" +
+					"<table>"+
+						"<tr>"+
+						"<td>"+
+						
+						this.getImagesDiv(true)+
+						"</td>"+
+						"<td style='width: 100%'>"+
 						add_button+
-						this.getImagesDiv(true)
-						+
 						"<span class=\"commentAuthor\">" +
 							this.author.login+
 						"</span>" +
@@ -220,9 +234,13 @@ Comment.prototype.getHtml = function() {
 						"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
 							this.dim +
 						"</div>" +
+					
+						"</td>"+
+						"</tr>"+
+					"</table>"+
 						"<div class=\"line_separator\"></div>" +
-					"</div>" +
 				"</div>\n";
+	
 
 	return resu.toString();
 
@@ -295,13 +313,13 @@ function extItem(cid){
 //Insère un commentaire dans la base de données
 function insertCmt (form){
 	var user=environnement.actif;
-	var comment = encodeURIComponent(form.commentInput.value);
-	var price = encodeURIComponent(form.priceInput.value);
-	var desc = encodeURIComponent(form.descInput.value);
-	var dim = encodeURIComponent(form.dimInput.value);
+	var comment = form.commentInput.value;
+	var price = form.priceInput.value;
+	var desc = form.descInput.value;
+	var dim =form.dimInput.value;
 	var lat = marker.getPosition().lat();
 	var lng = marker.getPosition().lng();
-	var addr = encodeURIComponent(form.adressInput.value);
+	var addr = form.adressInput.value;
 	
 	// Convert form to formData type
 	//var formData = new FormData();

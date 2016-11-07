@@ -231,9 +231,7 @@ function traiteReponseConnexion(rep){
 	if(rep.error != undefined){
 		fonc_erreur(null, rep.error);
 	}else{
-		window.location.href=	"main.jsp?id="+rep.id+
-								"&login="+rep.login+
-								"&key="+rep.key;
+		window.location.href=	"main.jsp";
 		
 	}
 	

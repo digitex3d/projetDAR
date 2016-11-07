@@ -10,6 +10,11 @@
 	
 }
 
+.imageAnnonce {
+    border: 5px solid #ffffff;
+    box-shadow: 0 0 20px -0px rgba(0, 0, 0, 0.47);
+}
+
   #floating-panel {
         position: absolute;
         top: 10px;

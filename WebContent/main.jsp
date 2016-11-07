@@ -174,12 +174,23 @@
 			
 				
 						function() {
-	<%String id = request.getParameter("id");
-			String login = request.getParameter("login");
-			String key = request.getParameter("key");
-			
-			if ((id != null) && (login != null) && (key != null)) {
-				out.println("main('" + id + "','" + login + "','" + key + "');");
+	<%
+	Cookie[] cookies = request.getCookies();
+	
+	String sessionKey = null;
+	
+	// Parsing des cookies pour vérifier la session
+	if(cookies !=null)
+		for(Cookie cookie : cookies)
+			if(cookie.getName().equals("session_key")) 
+				sessionKey = cookie.getValue();
+	
+ 			String id = (String) session.getAttribute("id");
+ 			String login = (String) session.getAttribute("login");
+
+			if (sessionKey != null) {
+				out.println("main('" + id + "','" + login + "','" + sessionKey + "');");
+				//out.println("main('" + sessionKey + "');");
 
 			} else {
 				out.println("main();");
