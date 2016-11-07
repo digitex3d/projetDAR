@@ -3,6 +3,9 @@ var marker = null;
 
 // Outils pour Google Maps
 function initMap() {
+
+	
+	// Ajoute logement map
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 11,
 		center: {lat: 48.856, lng: 2.3522}

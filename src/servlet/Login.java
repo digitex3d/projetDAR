@@ -77,7 +77,7 @@ public class Login extends HttpServlet{
 						
 						// Cookie de session
 						Cookie cookieId = new Cookie("session_key", key);
-						cookieId.setMaxAge(60*24*15);
+						cookieId.setMaxAge(60*60*24*15);
 						session.setAttribute("session_key", key);
 						session.setAttribute("id", Integer.toString(id));
 						session.setAttribute("login", login);
