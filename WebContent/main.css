@@ -99,7 +99,11 @@ body{
 		100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6',
 		endColorstr='#d5ebfb', GradientType=0); /* IE6-9 */
-	font-family: verdana;}
+	font-family: verdana;
+	
+	min-height:800px;
+	
+	}
 
 h1{
 	color:white;

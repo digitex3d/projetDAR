@@ -317,8 +317,10 @@ function insertCmt (form){
 	var price = form.priceInput.value;
 	var desc = form.descInput.value;
 	var dim =form.dimInput.value;
-	var lat = marker.getPosition().lat();
-	var lng = marker.getPosition().lng();
+/*	var lat = marker.getPosition().lat();
+	var lng = marker.getPosition().lng();*/
+	//TODO: tester l'ajout des details dans la base
+	var placeDetails = place.getDetails();
 	var addr = form.adressInput.value;
 	
 	// Convert form to formData type

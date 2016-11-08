@@ -1,6 +1,6 @@
 
 var marker = null;
-var place = null;
+
 // Outils pour Google Maps
 function initMap() {
 
@@ -27,7 +27,7 @@ function initMap() {
     autocomplete.addListener('place_changed', function() {
         infowindow.close();
         marker.setVisible(false);
-        place = autocomplete.getPlace();
+        var place = autocomplete.getPlace();
         if (!place.geometry) {
           // User entered the name of a Place that was not suggested and
           // pressed the Enter key, or the Place Details request failed.

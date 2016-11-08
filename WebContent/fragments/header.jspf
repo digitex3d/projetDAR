@@ -1,0 +1,32 @@
+<!-- TOP MENU -->
+	<div class="header">
+		<span id="disconnect"><a href="javascript:  deconnect();">Log
+				out</a></span>
+		<div id="search_box">
+			<form onsubmit="search(this.rechercheInput.value)"
+				action="javascript:" id="searchForm">
+				<input placeholder="Recherche" name="rechercheInput"
+					id="rechercheInput" class="textInput" />
+				<div id="circularG">
+					<div id="circularG_1" class="circularG">
+					</div>
+					<div id="circularG_2" class="circularG">
+					</div>
+					<div id="circularG_3" class="circularG">
+					</div>
+					<div id="circularG_4" class="circularG">
+					</div>
+					<div id="circularG_5" class="circularG">
+					</div>
+					<div id="circularG_6" class="circularG">
+					</div>
+					<div id="circularG_7" class="circularG">
+					</div>
+					<div id="circularG_8" class="circularG">
+					</div>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+<!-- ##################### FIN TOP MENU ##################### -->

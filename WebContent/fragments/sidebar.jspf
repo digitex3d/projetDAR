@@ -1,0 +1,19 @@
+<div id="left_panel">
+	<!-- ##################### DASHBOARD ##################### -->
+	<div id="dashboard" class="panel">
+		<a href="main.jsp"><h1>Jecoloc</h1></a>
+		<div class="profile">
+			<div id="fullname"></div>
+			<a href="addlogement.jsp"> Ajouter logement </a>
+		</div>
+
+
+	</div>
+	<div id="friends_box" class="panel">
+		<h1>Amis</h1>
+		<div id="nb_amis"></div>
+		<div id="friends_list"></div>
+	</div>
+
+
+</div>
