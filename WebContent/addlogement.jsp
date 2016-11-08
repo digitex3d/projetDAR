@@ -100,43 +100,7 @@
 		charset="UTF-8"></script>
 
 	<!-- main script -->
-	<script type="text/javascript">
-		
-	<%String filepath = application.getContextPath();
-			out.println("var imagepath=\"" + filepath + "\";");%>
-		$(document)
-				.ready(
-
-						function() {
-	<%Cookie[] cookies = request.getCookies();
-
-			String sessionKey = null;
-
-			// Parsing des cookies pour vérifier la session
-			if (cookies != null)
-				for (Cookie cookie : cookies)
-					if (cookie.getName().equals("session_key"))
-						sessionKey = cookie.getValue();
-
-			String id = (String) session.getAttribute("id");
-			String login = (String) session.getAttribute("login");
-
-			if (sessionKey != null) {
-				out.println("main('" + id + "','" + login + "','" + sessionKey + "');");
-				//out.println("main('" + sessionKey + "');");
-
-			} else {
-				out.println("main();");
-
-			}%>
-			
-			// Add an event handler ont the file input change.
-			$("#imageSelect").change(uploadImage);
-
-		});
-		
-		
-	</script>
+		<%@ include file="fragments/mainScripts.jspf"%>
 
 </body>
 </html>

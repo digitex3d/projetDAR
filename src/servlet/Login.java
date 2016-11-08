@@ -76,12 +76,19 @@ public class Login extends HttpServlet{
 						JSONObject repobjs = new JSONObject();
 						
 						// Cookie de session
-						Cookie cookieId = new Cookie("session_key", key);
-						cookieId.setMaxAge(60*60*24*15);
-						session.setAttribute("session_key", key);
+						Cookie session_keycook = new Cookie("session_key", key);
+						session_keycook.setMaxAge(60*60*24*15);
+						Cookie idcook = new Cookie("id", Integer.toString(id));
+						idcook.setMaxAge(60*60*24*15);
+						Cookie logincook = new Cookie("login", login);
+						logincook.setMaxAge(60*60*24*15);
+						
+					/*	session.setAttribute("session_key", key);
 						session.setAttribute("id", Integer.toString(id));
-						session.setAttribute("login", login);
-						response.addCookie(cookieId);
+						session.setAttribute("login", login);*/
+						response.addCookie(session_keycook);
+						response.addCookie(idcook);
+						response.addCookie(logincook);
 						
 
 						/*repobjs.put("id", Integer.toString(id));

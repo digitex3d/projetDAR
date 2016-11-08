@@ -1,0 +1,44 @@
+<script type="text/javascript">
+	<% String filepath= application.getContextPath();
+		out.println("var imagepath=\""+filepath+"\";");%>
+		$(document)
+				.ready(
+			
+				
+						function() {
+	<%
+	Cookie[] cookies = request.getCookies();
+	
+	String sessionKey = null;
+	String id = null;
+	String login = null;
+	
+	// Parsing des cookies pour vérifier la session
+	if(cookies !=null)
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equals("session_key")) 
+				sessionKey = cookie.getValue();
+			if(cookie.getName().equals("id")) 
+				 id =cookie.getValue();
+			if(cookie.getName().equals("login")) 
+				login = cookie.getValue();
+			
+		}
+	
+
+			if (sessionKey != null) {
+				out.println("main('" + id + "','" + login + "','" + sessionKey + "');");
+				//out.println("main('" + sessionKey + "');");
+
+			} else {
+				out.println("main();");
+
+			}%>
+			
+			// Add an event handler ont the file input change.
+			$("#imageSelect").change(uploadImage);
+
+		});
+		
+		
+	</script>

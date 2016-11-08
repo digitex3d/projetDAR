@@ -89,19 +89,40 @@ Comment.prototype.getExtHtml = function () {
 	}
 	
 	var description = 
-	
-		"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">" +
-				"<p class='prix'>Prix:"
-				+this.prix + "€</p>" +
-		"</div>" +
-		"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
-				"<p class='description'>Déscription:" +
+		"<tr class='annonce'>"+
+			"<td class='annonce'>"+
+				"<p>Prix</p>"+
+			"</td>"+
+			"<td class='annonce'>"+
+				"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">" +
+						"<p class='prix'>"
+						+this.prix + "€</p>" +
+				"</div>" +
+			"</td>"+
+		"</tr>"+
+		"<tr class='annonce'>"+
+			"<td class='annonce'>"+
+				"<p>Dimension</p>"+
+			"</td>"+
+			"<td class='annonce'>"+
+				"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
+					"<p class='dimension'>" +
+					this.dim + "m²</p>"+
+					"</div>"+
+			"</td>"+
+	"</tr>"+
+	"<tr class='annonce'>"+
+			"<td class='annonce'>"+
+				"<p>Déscription</p><br>"+
+				"</td>"+
+				"<td class='annonce'>"+
+				"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
+				"<p class='description'>" +
 				this.desc +"</p>" +
-		"</div>" +
-		"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
-				"<p class='dimension'>Dimension:" +
-				this.dim + "m²</p>"+
-		"</div>";
+			"</div>" +
+			"</td>"+
+			"</tr>"
+			;
 	
 	var resu = 	
 		"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
@@ -115,20 +136,26 @@ Comment.prototype.getExtHtml = function () {
 		this.date+
 		"</div>" +
 
-		// Images
-		this.getImagesDiv(false) +
+			// Images
+			this.getImagesDiv(false) +
 
-		// Description
-		genHTMLtag("div", "description-containter_"+cid, "description", description)
-		+
-		coloc_button+
-		// Colocataires
-		"<div class=\"colocataires\"><p>Colocataires</p>"+	
-	
-		"<span  id=\"coloc_names_" + cid +"\"> </span>"+
-		"</div>" +
+		"<table class='annonce'>"+
 		
-		"</div>\n"+
+		// Description
+		genHTMLtag("div", "description-containter_"+cid, "description", description)+
+		"</table>"+
+		
+				coloc_button+
+				
+				// Colocataires
+				"<div class=\"colocataires\"><p>Colocataires</p>"+	
+			
+				"<span  id=\"coloc_names_" + cid +"\"> </span>"+
+				"</div>" +
+				
+				"</div>\n"+
+
+		
 		"<div class=\"line_separator\"></div>";
 
 return resu.toString();
@@ -317,10 +344,10 @@ function insertCmt (form){
 	var price = form.priceInput.value;
 	var desc = form.descInput.value;
 	var dim =form.dimInput.value;
-/*	var lat = marker.getPosition().lat();
-	var lng = marker.getPosition().lng();*/
-	//TODO: tester l'ajout des details dans la base
-	var placeDetails = place.getDetails();
+	var lat = marker.getPosition().lat();
+	var lng = marker.getPosition().lng();
+	
+
 	var addr = form.adressInput.value;
 	
 	// Convert form to formData type
@@ -364,8 +391,8 @@ function insertCmt (form){
 			data: formData,	
 			url: server_path + "addComment",
 			success: traiteReponseInsert,
-			error: traiteReponseErreur
-
+			error: traiteReponseErreur,
+		
 		});
 
 	}
