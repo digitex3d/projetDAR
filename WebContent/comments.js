@@ -121,8 +121,23 @@ Comment.prototype.getExtHtml = function () {
 				this.desc +"</p>" +
 			"</div>" +
 			"</td>"+
-			"</tr>"
-			;
+			"</tr>"+
+			"<tr class='annonce'>"+
+				"<td class='annonce'>"+
+					"<p>Lieu</p><br>"+
+				"</td>"+
+				"<td class='annonce'>"+
+				"<div id='mapLittle'></div>"+
+				"</td>"+
+			"</tr>"+
+			"<tr class='annonce'>"+
+			"<td class='annonce'>"+
+				"<p>Adresse</p><br>"+
+			"</td>"+
+			"<td class='annonce'>"+
+			this.addr+
+			"</td>"+
+		"</tr>";
 	
 	var resu = 	
 		"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
@@ -135,9 +150,20 @@ Comment.prototype.getExtHtml = function () {
 		"<div class=\"commentDate\">" +
 		this.date+
 		"</div>" +
-
+		"<table>"+
+		"<tr>"+
+			"<td>"+
+			
+			"</td>"+
+			"<td>"+
 			// Images
 			this.getImagesDiv(false) +
+			"</td>"+
+		"</tr>"+
+		
+		"</table>"+
+
+		
 
 		"<table class='annonce'>"+
 		
@@ -154,9 +180,9 @@ Comment.prototype.getExtHtml = function () {
 				"</div>" +
 				
 				"</div>\n"+
-
 		
 		"<div class=\"line_separator\"></div>";
+
 
 return resu.toString();
 	
@@ -245,7 +271,7 @@ Comment.prototype.getHtml = function() {
 							this.author.login+
 						"</span>" +
 						"<a class=\"annonce_link\""+
-						" href=\" javascript: extItem('"+ cid +"'); \" >"+
+						" href='annonce.jsp?id="+ cid +"' >"+
 						"<span class=\"commentContent\">" +
 							this.text+
 						"</span>" + "</a>" +
@@ -324,14 +350,22 @@ Comment.traiterResponseJSON = function(data){
 
 
 function extItem(cid){
-	var timeline=environnement.timeline;
-	var annonce = timeline.getComment(cid);
+	if( environnement.timeline != null)
+		var timeline=environnement.timeline;
+	else return;
 	
-	$("#timeline").html(annonce.getExtHtml());
+	if( timeline.getComment(cid) != null){
+		var annonce = timeline.getComment(cid);
+	
+		$("#timeline").html(annonce.getExtHtml());
 	
 	// Afficher les colocataires
 	//TODO: changer nom
-	updateLikes();
+		updateLikes();
+}else{
+	alert(timeline.getComment(cid));
+	return;
+}
 	
 	
 };

@@ -1,3 +1,10 @@
+/* Google maps */
+
+#mapLittle {
+        height: 200px;
+        width: 200px;
+     }
+
 /* ############   Images ############ */
 div .imagescontainer {
 	padding-right: 20px;
@@ -18,7 +25,6 @@ div .imagescontainer {
 }	
 
 .annonce th {
-	background: url(http://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
 	border-left: 1px solid #555;
 	border-right: 1px solid #777;
 	border-top: 1px solid #555;
@@ -91,12 +97,3 @@ div .imagescontainer {
 	box-shadow: inset -1px -1px 0 #fff;
 }	
 
-.annonce tbody:hover td {
-	color: transparent;
-	text-shadow: 0 0 3px #aaa;
-}
-
-.annonce tbody:hover tr:hover td {
-	color: #444;
-	text-shadow: 0 1px 0 #fff;
-}

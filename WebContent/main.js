@@ -32,6 +32,7 @@ function main(id, login, key) {
 		likes();
 		friends();
 		gererDivConnexion();
+
 	
 	}
 	else {
