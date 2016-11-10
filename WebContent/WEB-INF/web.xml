@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+   <filter>
+    <filter-name>ConnectionFilter</filter-name>
+    <filter-class>filters.ConnectionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ConnectionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>UploadImage</servlet-name>
     <servlet-class>servlet.UploadImage</servlet-class>
