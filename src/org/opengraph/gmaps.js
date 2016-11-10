@@ -1,3 +1,4 @@
+
 var marker = null;
 var place = null;
 // Outils pour Google Maps
@@ -81,3 +82,4 @@ function placeMarkerAndPanTo(latLng, map) {
 	
 	map.panTo(latLng);
 }
+

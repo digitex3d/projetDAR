@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.opengraph.OpenGraph;
+
+import com.mongodb.BasicDBObject;
 
 import services.auth.AuthentificationTools;
 import services.service.CommentsTools;
@@ -61,8 +66,10 @@ public class AddComment extends HttpServlet{
 		String lat = request.getParameter("lat");
 		String lng = request.getParameter("lng");
 		String addr = request.getParameter("addr");
+		// Adresse de reference pour parser les metadata
+		String refpage = request.getParameter("refpage");
 		
-		System.out.println(authorid);
+		BasicDBObject jsonrefpage  = new BasicDBObject();
 
 		// On ajoute le commentaire
 		if(comment != null && !comment.equals("null") &&
@@ -77,7 +84,51 @@ public class AddComment extends HttpServlet{
 				return; 
 			}
 			
-			CommentsTools.addComment(Integer.parseInt(authorid), comment, price, desc, dim, imgid, nbimg, lat, lng, addr);
+			// Refpage parsing
+			if(refpage != null && !refpage.isEmpty()){
+				// Vérifie que c'est un url
+				String regex = "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+				Pattern p = Pattern.compile(regex);
+				Matcher m = p.matcher(refpage);
+				
+				
+				if( !m.matches() )
+					{ out.write( new JSONObject().put("error", "Erreur d'insertion url de reférence").toString());return; }
+				
+				
+				// Parsing des meta données OpenGraph
+				OpenGraph site;
+				try { site = new OpenGraph(refpage, true); } 
+				catch (Exception e) 					
+					{ out.write( 
+						new JSONObject().put("error", "Erreur d'insertion url de reférence").toString());return; }
+				
+				
+				String ogtitle = site.getContent("title");
+				String ogdescription = site.getContent("description");
+				String ogimage = site.getContent("image");
+				
+				
+				// Création Objet JSON contenant les metadonnées
+			
+				jsonrefpage.put("title",  ogtitle);
+				jsonrefpage.put("description",  ogdescription); 
+				jsonrefpage.put("image",  ogimage);
+				jsonrefpage.put("url",  refpage); 
+
+			}
+			
+			CommentsTools.addComment(Integer.parseInt(authorid), 
+					comment, 
+					price, 
+					desc, 
+					dim, 
+					imgid, 
+					nbimg, 
+					lat, 
+					lng, 
+					addr,
+					jsonrefpage);
 
 			GeneralTools.serverLog(	"Commentaire id: " + authorid +
 					" cmt: " +comment + " ajouté");

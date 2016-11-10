@@ -52,7 +52,20 @@ Timeline.prototype.getHtml = function(){
 
 //############################ COMMENT ###############################
 
-function Comment (id, author, text, date, score, prix, desc, dim, imgid, nbimg, lat, lng, addr) {
+function Comment (id,
+		author,
+		text,
+		date,
+		score,
+		prix, 
+		desc,
+		dim, 
+		imgid,
+		nbimg,
+		lat, 
+		lng, 
+		addr,
+		refpage) {
 	this.id=id;
 	this.author=author;
 	this.text=text;
@@ -66,6 +79,7 @@ function Comment (id, author, text, date, score, prix, desc, dim, imgid, nbimg, 
 	this.lat=lat;
 	this.lng=lng;
 	this.addr=addr;
+	this.refpage= refpage;
 
 	if (score == undefined) {
 		this.score=0;
@@ -127,7 +141,7 @@ Comment.prototype.getExtHtml = function () {
 					"<p>Lieu</p><br>"+
 				"</td>"+
 				"<td class='annonce'>"+
-				"<div id='mapLittle'></div>"+
+				"<div id='map'></div>"+
 				"</td>"+
 			"</tr>"+
 			"<tr class='annonce'>"+
@@ -138,6 +152,28 @@ Comment.prototype.getExtHtml = function () {
 			this.addr+
 			"</td>"+
 		"</tr>";
+	
+		
+		
+	
+	
+	if( this.refpage != null){
+
+		var refpageHTML = "<tr class='annonce'>"+
+		"<td class='annonce'>"+
+		"<p>Site de référence</p><br>"+
+		"</td>"+
+	"<td class='annonce'>"+
+		"<a href='"+ this.refpage.url +"'>Annonce originale</a><br>"+
+		"<p>Titre: "+ this.refpage.title +"</p><br>"+
+		"<img src='" + this.refpage.image +"' height='250' width='250'></img><br>"+
+		"<p>Déscription: "+ this.refpage.description +"</p>"+
+
+	"</td>"+
+	"</tr>";
+		
+		description += refpageHTML;
+	}
 	
 	var resu = 	
 		"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
@@ -182,6 +218,8 @@ Comment.prototype.getExtHtml = function () {
 				"</div>\n"+
 		
 		"<div class=\"line_separator\"></div>";
+	
+
 
 
 return resu.toString();
@@ -315,7 +353,7 @@ Comment.traiterResponseJSON = function(data){
 		author = (environnement.users[comment.author_id]==undefined) ? 
 				new User(comment.author_id, comment.author_name) : 
 					environnement.users[comment.author_id];
-
+				
 				obj = new Comment (comment.id, 
 						author,
 						comment.text,
@@ -328,7 +366,8 @@ Comment.traiterResponseJSON = function(data){
 						comment.nbimg,
 						comment.lat,
 						comment.lng,
-						comment.addr);
+						comment.addr,
+						comment.refpage);
 				environnement.timeline.addComment(obj);
 
 	}
@@ -377,12 +416,12 @@ function insertCmt (form){
 	var comment = form.commentInput.value;
 	var price = form.priceInput.value;
 	var desc = form.descInput.value;
-	var dim =form.dimInput.value;
+	var dim = form.dimInput.value;
 	var lat = marker.getPosition().lat();
 	var lng = marker.getPosition().lng();
-	
-
+	var refpage =  form.refpageInput.value;
 	var addr = form.adressInput.value;
+
 	
 	// Convert form to formData type
 	//var formData = new FormData();
@@ -398,6 +437,7 @@ function insertCmt (form){
 			"nbimg": environnement.images.nbimg,
 			"lat" : lat, 
 			"lng": lng,
+			"refpage": refpage
 			
 	}
 	

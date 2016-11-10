@@ -1,8 +1,8 @@
 /* Google maps */
 
-#mapLittle {
-        height: 200px;
-        width: 200px;
+#map {
+        height: 300px;
+        width: 300px;
      }
 
 /* ############   Images ############ */
@@ -66,10 +66,13 @@ div .imagescontainer {
 	padding: 10px 15px;
 	position: relative;
 	transition: all 300ms;
+	  background-color: #d7ce0;
 }
 
 .annonce td:first-child {
 	box-shadow: inset 1px 0 0 #fff;
+    background-color: #b9d9ef;
+    
 }	
 
 .annonce td:last-child {
@@ -77,13 +80,6 @@ div .imagescontainer {
 	box-shadow: inset -1px 0 0 #fff;
 }	
 
-.annonce tr {
-	background: url(http://jackrugile.com/images/misc/noise-diagonal.png);	
-}
-
-.annonce tr:nth-child(odd) td {
-	background: #f1f1f1 url(http://jackrugile.com/images/misc/noise-diagonal.png);	
-}
 
 .annonce tr:last-of-type td {
 	box-shadow: inset 0 -1px 0 #fff; 

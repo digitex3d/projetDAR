@@ -81,9 +81,13 @@
     <servlet-name>Images</servlet-name>
     <servlet-class>servlet.redirect.Imgs</servlet-class>
   </servlet>
+  <welcome-file-list>
+   <welcome-file>main.jsp</welcome-file>
+</welcome-file-list>
   <servlet-mapping>
     <servlet-name>Images</servlet-name>
     <url-pattern>/imgs/*</url-pattern>
   </servlet-mapping>
-  <!--######################################################## -->
+  
+  
 </web-app>

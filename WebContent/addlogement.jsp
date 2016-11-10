@@ -44,8 +44,14 @@
 													name="dimInput" id="dim" class="textInput" /> <input
 													type="file" name="image" id="imageSelect" size="50"
 													multiple /> <input placeholder="Adresse..."
-													name="adressInput" id="address" class="textInput" /> <input
+													name="adressInput" id="address" class="textInput" />
+													<input
+													placeholder="URL de reférence..." name="refpageInput" id="ref"
+													class="textInput" /> 
+
+<input
 													type="submit" value="Add">
+													
 											</form>
 
 										</div>
@@ -96,8 +102,7 @@
 
 	<!-- This script contains tools that helps with the generation of HTML code  -->
 	<script type="text/javascript" src="HTMLTools.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="js/ajouterLogement.js"
-		charset="UTF-8"></script>
+	<script type="text/javascript" src="js/ajouterLogement.js" charset="UTF-8"></script>
 
 	<!-- main script -->
 		<%@ include file="fragments/mainScripts.jspf"%>
