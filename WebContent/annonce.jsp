@@ -9,6 +9,31 @@
 <link rel="stylesheet" type="text/css" href="main.css">
 <link rel="stylesheet" type="text/css" href="loading.css">
 <link rel="stylesheet" type="text/css" href="CSS/annonce.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="search.js" charset="UTF-8"></script>
+<script type="text/javascript" src="comments.js" charset="UTF-8"></script>
+<script type="text/javascript" src="friends.js" charset="UTF-8"></script>
+<script type="text/javascript" src="errors.js" charset="UTF-8"></script>
+<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
+<script type="text/javascript" src="main.js" charset="UTF-8"></script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4&callback=initMap"></script>
+
+<script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
+<!-- Google maps outils -->
+<!-- Google maps API -->
+
+
+
+
+
+
+<!-- This script contains tools that helps with the generation of HTML code  -->
+<script type="text/javascript" src="HTMLTools.js" charset="UTF-8"></script>
+
+
+
 </head>
 <body>
 	<!-- HEADER -->
@@ -41,28 +66,7 @@
 	<!-- FOOTER -->
 	<%@ include file="fragments/footer.jspf"%>
 
-	<script type="text/javascript" src="jquery-1.11.0.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="search.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="comments.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="friends.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="errors.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="main.js" charset="UTF-8"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4&callback=initMap"></script>
-
-	<script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
-	<!-- Google maps outils -->
-	<!-- Google maps API -->
-
-
-
-
-
-
-	<!-- This script contains tools that helps with the generation of HTML code  -->
-	<script type="text/javascript" src="HTMLTools.js" charset="UTF-8"></script>
-
-
+	
 
 	<!-- main script -->
 	<script type="text/javascript">
