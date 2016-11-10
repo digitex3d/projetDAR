@@ -10,7 +10,7 @@
 
 	</div>
 	<div id="friends_box" class="panel">
-		<h1>Amis</h1>
+		<h1>Following</h1>
 		<div id="nb_amis"></div>
 		<div id="friends_list"></div>
 	</div>

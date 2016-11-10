@@ -141,7 +141,9 @@ Comment.prototype.getExtHtml = function () {
 					"<p>Lieu</p><br>"+
 				"</td>"+
 				"<td class='annonce'>"+
+				
 				"<div id='map'></div>"+
+				"<div id='pano'></div>"+
 				"</td>"+
 			"</tr>"+
 			"<tr class='annonce'>"+
@@ -152,11 +154,7 @@ Comment.prototype.getExtHtml = function () {
 			this.addr+
 			"</td>"+
 		"</tr>";
-	
-		
-		
-	
-	
+
 	if( this.refpage != null){
 
 		var refpageHTML = "<tr class='annonce'>"+

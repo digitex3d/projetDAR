@@ -101,6 +101,8 @@
 			// Add an event handler ont the file input change.
 			$("#imageSelect").change(uploadImage);
 		
+		
+			
 			function initMap(){
 				// Map position
 				var latlng = new google.maps.LatLng(annonce.lat, annonce.lng);
@@ -112,17 +114,27 @@
 
 							});
 							
-							marker = new google.maps.Marker({
-								position: latlng,
-								map: map
-							});
+						
+							
+							   var panorama = new google.maps.StreetViewPanorama(
+							            document.getElementById('pano'), {
+							              position: latlng,
+							              pov: {
+							                heading: 34,
+							                pitch: 10
+							              }
+							            });
+							        map.setStreetView(panorama);
+
+							
+					
 
 					
 				}	
 			
 	$(document).ready(	
 		function() {	
-			
+			gmapsAPIkey = "AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4";
 			if( environnement.timeline != null)
 				var timeline=environnement.timeline;
 			else alert("timeline not defined");
