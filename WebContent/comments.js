@@ -65,7 +65,8 @@ function Comment (id,
 		lat, 
 		lng, 
 		addr,
-		refpage) {
+		refpage,
+		RATPStations) {
 	this.id=id;
 	this.author=author;
 	this.text=text;
@@ -80,6 +81,7 @@ function Comment (id,
 	this.lng=lng;
 	this.addr=addr;
 	this.refpage= refpage;
+	this.RATPStations= RATPStations;
 
 	if (score == undefined) {
 		this.score=0;
@@ -164,6 +166,8 @@ Comment.prototype.getExtHtml = function () {
 				this.lng, 
 				500,
 				15)+
+				
+			"<div id='mapRATP'></div>"+
 		"</td>"+
 	"</tr>"
 			;
@@ -378,7 +382,8 @@ Comment.traiterResponseJSON = function(data){
 						comment.lat,
 						comment.lng,
 						comment.addr,
-						comment.refpage);
+						comment.refpage,
+						comment.RATPStations);
 				environnement.timeline.addComment(obj);
 
 	}

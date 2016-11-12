@@ -1,6 +1,6 @@
 /* Google maps */
 
-#map, #pano {
+#map, #pano, #mapRATP {
         height: 300px;
         width: 300px;
           float: left;

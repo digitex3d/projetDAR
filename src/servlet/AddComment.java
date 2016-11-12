@@ -1,7 +1,11 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,11 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.util.http.mapper.Mapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.opengraph.OpenGraph;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.util.JSON;
 
 import services.auth.AuthentificationTools;
 import services.service.CommentsTools;
@@ -25,6 +33,8 @@ import services.service.GeneralTools;
  */
 @SuppressWarnings("serial")
 public class AddComment extends HttpServlet{
+	public static final String RATP_API_URL = "http://data.ratp.fr/api/records/1.0/search/";
+	
 	@Override
 	public void doGet(HttpServletRequest request,
 			HttpServletResponse response)
@@ -118,6 +128,33 @@ public class AddComment extends HttpServlet{
 
 			}
 			
+			/**
+			 * On récupère les donnés des stations RATP à partir de son api REST.
+			 */
+			
+			String RATPquery = genRATPquery(lat, lng, "500");
+			
+			// Connection à L'API RATP
+			URLConnection connection = new URL(RATP_API_URL + "?" + RATPquery).openConnection();
+			connection.setRequestProperty("Accept-Charset", "UTF-8");
+			connection.setRequestProperty("Content-Type", "json;charset=utf-8");
+			InputStream RATPresponse = connection.getInputStream();
+			
+			StringWriter writer = new StringWriter();
+			IOUtils.copy(RATPresponse, writer, "UTF-8");
+			
+			String RATPrespStr = writer.toString();
+			
+			RATPrespStr = RATPrespStr.replaceAll("geofilter.distance", "geofilter-distance");
+
+			System.out.println(RATPrespStr);
+			// Conversion JSON string to BasicDBObject
+			JSONObject jsonRATPstations = new JSONObject (RATPrespStr);
+			Object o = com.mongodb.util.JSON.parse(jsonRATPstations.toString());
+			DBObject RATPstations = (DBObject) o;
+			
+			System.out.println(RATPstations.toString());
+			
 			CommentsTools.addComment(Integer.parseInt(authorid), 
 					comment, 
 					price, 
@@ -128,7 +165,8 @@ public class AddComment extends HttpServlet{
 					lat, 
 					lng, 
 					addr,
-					jsonrefpage);
+					jsonrefpage,
+					RATPstations);
 
 			GeneralTools.serverLog(	"Commentaire id: " + authorid +
 					" cmt: " +comment + " ajouté");
@@ -142,6 +180,23 @@ public class AddComment extends HttpServlet{
 				
 		}
 
+	}
+	
+	/**
+	 * Génère l'URL pour une query pour l'API RATP
+	 * avec les points dans le cercle de rayon donné centré
+	 * dans sur le point de coordonnées (lat,lng)
+	 */
+	private String genRATPquery(String lat,String lng, String rayon ){
+		String RATPquery ="dataset=positions-geographiques-des-stations-du-reseau-ratp"
+				+ "&rows=10&facet=stop_name"
+				+ "&facet=code_postal"
+				+ "&facet=departement"
+				+ "&geofilter.distance="+lat
+				+ "%2C"+lng
+				+ "%2C"+rayon;
+		return RATPquery;
+		
 	}
 
 }

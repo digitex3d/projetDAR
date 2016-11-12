@@ -17,8 +17,7 @@
 <script type="text/javascript" src="errors.js" charset="UTF-8"></script>
 <script type="text/javascript" src="likes.js" charset="UTF-8"></script>
 <script type="text/javascript" src="main.js" charset="UTF-8"></script>
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4&callback=initMap"></script>
+
 
 <script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
 <!-- Google maps outils -->
@@ -107,21 +106,21 @@
 		
 		
 			
-			function initMap(){
+			function initMapAnnonce(){
 				// Map position
 				var latlng = new google.maps.LatLng(annonce.lat, annonce.lng);
 				
 				// Ajoute logement map
-				var map = new google.maps.Map(document.getElementById('map'), {
+				var map = new google.maps.Map(document.getElementById("map"), {
 						zoom: 15,
 						center: latlng
 
 							});
 							
 						
-							
-							   var panorama = new google.maps.StreetViewPanorama(
-							            document.getElementById('pano'), {
+				// Ajoute StreetView		
+				var panorama = new google.maps.StreetViewPanorama(
+						document.getElementById("pano"), {
 							              position: latlng,
 							              pov: {
 							                heading: 34,
@@ -129,6 +128,60 @@
 							              }
 							            });
 							        map.setStreetView(panorama);
+							        
+				// Ajoute MAP RATP		
+				var mapRATP =  new google.maps.Map(document.getElementById("mapRATP"), {
+					zoom: 15,
+					center: latlng
+
+						});
+							        
+			
+				
+				// Marker position logement
+				var marker = new google.maps.Marker({
+					position: latlng,
+					map: mapRATP
+				});
+				
+				// Initialiser les markers des station metro
+				var stations = annonce.RATPStations.records;
+				var stationsMarker = [];
+				
+				for( var i in stations){
+					var coords = stations[i].geometry.coordinates;
+					var latlngStat = new google.maps.LatLng(coords[1], coords[0]);
+					
+					var currentMarker = new google.maps.Marker({
+						position: latlngStat,
+						map: mapRATP
+					});
+					
+					currentMarker.setIcon(/** @type {google.maps.Icon} */({
+				          url: "resources/ratp.png",
+				          size: new google.maps.Size(71, 71),
+				          origin: new google.maps.Point(0, 0),
+				          anchor: new google.maps.Point(17, 34),
+				          scaledSize: new google.maps.Size(35, 35)
+				        }));
+					
+					
+					
+					stationsMarker.push(currentMarker);
+					
+					
+					
+					
+				}
+				
+				 marker.setIcon(/** @type {google.maps.Icon} */({
+			          url: "http://downloadicons.net/sites/default/files/little-house-icon-31873.png",
+			          size: new google.maps.Size(71, 71),
+			          origin: new google.maps.Point(0, 0),
+			          anchor: new google.maps.Point(17, 34),
+			          scaledSize: new google.maps.Size(35, 35)
+			        }));
+				
 
 							
 					
@@ -153,8 +206,11 @@
 				
 			}
 			
+			$.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4", function( ) {
+					initMapAnnonce();		
+				});
 		
-						
+			
 		
 			}); 
 		

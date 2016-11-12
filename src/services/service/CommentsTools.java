@@ -45,7 +45,8 @@ public class CommentsTools {
 			, String lat
 			, String lng
 			, String addr
-			, BasicDBObject jsonrefpage) throws UnknownHostException, MongoException{
+			, BasicDBObject jsonrefpage
+			, DBObject RATPstations) throws UnknownHostException, MongoException{
 		Mongo m = DBStatic.getMongoConnection();
 		DB db = m.getDB(MDB_NAME);
 		DBCollection collection = db.getCollection("comments");
@@ -64,10 +65,12 @@ public class CommentsTools {
 		object.put("lng", lng);
 		object.put("addr", addr);
 		
-		// Adding jsonrefpage
-		
+		// Adding jsonrefpage		
 		object.put("refpage", jsonrefpage);
 		ColocTools.userInitColocs(key);
+		
+		// Adding RATPstations
+		object.put("RATPStations", (BasicDBObject) RATPstations);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date today = new Date();
