@@ -51,15 +51,21 @@ public class Register extends HttpServlet{
 			  ArrayList<String> params = new ArrayList<String>();
 			  String login;
 			  String password;
+			  String mail;
+			  String nom;
+			  String prenom;
 
 			  // On récupère les paramètres
 			  params.add(login = request.getParameter("login"));
 			  params.add(password = request.getParameter("password"));
+			  params.add(mail = request.getParameter("mail"));
+			  params.add(nom = request.getParameter("nom"));
+			  params.add(prenom = request.getParameter("prenom"));
 
 			  if(GeneralTools.paramVerif(params)){
 
 				  if( !AuthentificationTools.userExist(login)){
-					  AuthentificationTools.createUser(login, password,null, null);
+					  AuthentificationTools.createUser(login, password,prenom, nom, mail);
 					  int id = AuthentificationTools.getIDUser(login);
 					  // Initialise la base de données mongo
 					  try {

@@ -89,6 +89,11 @@ function show_register(){
 
 }
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 // Validate du form register
 function reg_validateForm(){
 	// Effacer les erreurs précédents
@@ -101,6 +106,11 @@ function reg_validateForm(){
 		flag &= validateEntry(e);
 		});
 	
+	if( !validateEmail($("#mail_register").val()) ){
+		fonc_erreur($("#mail_register"), "Le mail n'est pas valide");
+		return;
+	}
+	
 	if($("#pass_register").val() != $("#repass_register").val()){
 		fonc_erreur($("#repass_register"), "Les mots de pass ne sont pas égales");
 		
@@ -108,8 +118,11 @@ function reg_validateForm(){
 	}
 	
 	if(flag){
-		register($("#login_register").val(),
-				$("#pass_register").val()
+		register(	$("#login_register").val(),
+					$("#mail_register").val(),
+					$("#nom_register").val(),
+					$("#prenom_register").val(),
+					$("#pass_register").val()
 		
 		);
 		
@@ -168,29 +181,69 @@ User.prototype.getHtml = function(){
 						
 	}
 	
+	
+	
     var resu = 	"<div id=\"friend_" + this.id + "\" class=\"friend\"><p>" + 
     					remove_button+
-    					"<span class=\"friendName\">" +
+    					"<span class=\"friendName\" id='friend_id_"+ this.id +"'  >" +
     						this.login+
     					"</span>" +
   
-    			"</p></div>\n";
-  
+    			"</p></div>\n"+
+    			"<div class='popoutpanel' id='popoutpanel_" + this.id + "'>\n"+
+    				
+    			"</div>";
+
+    
+    
     return resu.toString();
 	
 };
+
+
+
+// fonction de callback pour obtenir une réponse d'une manière
+// "pseudo synchrone".
+function getHTMLfromServer(data) {
+    return data;
+    
+}
+
+// Appel ajax pour obtenir les infromations de l'utilisateur.
+// passer en paramètre un id et un fonction pour traiter les données
+function getuserinfo(id) {
+    $.ajax({
+    	data:	"id="+id,
+		url: server_path+"getuserinfo",
+		type:"GET",
+		success: function (data){
+			  $("#popoutpanel_" + id).html(data);
+			  $( "#popoutpanel_"+ id ).show();
+		},
+		error: traiteReponseErreur
+    });
+}
 
 //################################### FIN USER ########################################
 
 //################################### AUTH ########################################
 
 // Enregistrer un nouveau utilisateur
-function register(login, password){
+function register(login, mail, nom, prenom, password){
+	// Vider les champs
 	$("#login_register").val("");
 	$("#pass_register").val("");
+	$("#mail_register").val("");
+	$("#nom_register").val("");
+	$("#prenom_register").val("");
 	$("#repass_register").val("");
+	
 	$.ajax({
-		data:"login="+login+"&password="+password,
+		data:	"login="+login+
+				"&password="+password+
+				"&mail="+mail+
+				"&nom="+nom+
+				"&prenom="+prenom,
 		url: server_path+"register",
 		type:"GET",
 		success: traiteReponseRegister,

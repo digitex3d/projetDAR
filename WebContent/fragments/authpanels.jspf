@@ -1,51 +1,65 @@
-	<!-- ##################### REGISTRATION / CONNEXION  ##################### -->
-		<div class="offline_panels">
-			<table>
-				<tr>
 
-					<td><div id="login_panel" class="panel">
-							<h1>Ouvrir Session</h1>
-							<form action="" method="get" id="login_form">
-								<div class="ids">
-									<input type="text" id="login" name="login"
-										placeholder="Username" class="textInput" />
-								</div>
-								<div class="ids">
-									<input type="password" id="pass" name="pass"
-										placeholder="Mot de passe" class="textInput" />
-								</div>
-								<div class="buttons">
-									<a href="javascript: validateForm();">Connexion</a> <a
-										href="javascript: window.location.href='main.jsp';">Annuler</a>
-								</div>
-							</form>
-							<a href="javascript: show_register();">On ne se connait pas?</a>
-						</div></td>
-					<td>
-						<div id="register_panel" class="panel">
-							<h1>Enregistrement</h1>
-							<form action="" method="get" name="register_form">
-								<div class="ids_reg">
-									<input type="text" id="login_register" name="login"
-										placeholder="Username" class="textInput" />
-								</div>
-								<div class="ids_reg">
-									<input type="password" id="pass_register" name="pass"
-										placeholder="Mot de passe" class="textInput" />
-								</div>
-								<div class="ids_reg">
-									<input type="password" id="repass_register" name="pass"
-										placeholder="Retapez mot de passe" class="textInput" />
-								</div>
-								<div class="buttons">
-									<a href="javascript: reg_validateForm();">Enregistrer</a> <a
-										href="javascript: window.location.href='main.jsp';">Annuler</a>
-								</div>
-							</form>
+<!-- ##################### REGISTRATION / CONNEXION  ##################### -->
+<div class="offline_panels">
+	<table>
+		<tr>
 
+			<td><div id="login_panel" class="panel">
+					<h1>Ouvrir Session</h1>
+					<form action="" method="get" id="login_form">
+						<div class="ids">
+							<input type="text" id="login" name="login" placeholder="Username"
+								class="textInput" />
 						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<!--##################### FIN REGISTRATION / CONNEXION  #####################-->
+						<div class="ids">
+							<input type="password" id="pass" name="pass"
+								placeholder="Mot de passe" class="textInput" />
+						</div>
+						<div class="buttons">
+							<a href="javascript: validateForm();">Connexion</a> <a
+								href="javascript: window.location.href='main.jsp';">Annuler</a>
+						</div>
+					</form>
+					<a href="javascript: show_register();">On ne se connait pas?</a>
+				</div></td>
+			<td>
+				<div id="register_panel" class="panel">
+					<h1>Enregistrement</h1>
+					<form action="" method="get" name="register_form">
+						<div class="ids_reg">
+							<input type="text" id="login_register" name="login"
+								placeholder="Username" class="textInput" />
+						</div>
+						<div class="ids_reg">
+							<input type="text" id="mail_register" name="mail"
+								placeholder="Email" class="textInput" />
+						</div>
+						<div class="ids_reg">
+							<input type="text" id="nom_register" name="nom"
+								placeholder="Nom de famille" class="textInput" />
+						</div>
+
+						<div class="ids_reg">
+							<input type="text" id="prenom_register" name="prenom"
+								placeholder="Prénom" class="textInput" />
+						</div>
+						<div class="ids_reg">
+							<input type="password" id="pass_register" name="pass"
+								placeholder="Mot de passe" class="textInput" />
+						</div>
+						<div class="ids_reg">
+							<input type="password" id="repass_register" name="pass"
+								placeholder="Retapez mot de passe" class="textInput" />
+						</div>
+						<div class="buttons">
+							<a href="javascript: reg_validateForm();">Enregistrer</a> <a
+								href="javascript: window.location.href='main.jsp';">Annuler</a>
+						</div>
+					</form>
+
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<!--##################### FIN REGISTRATION / CONNEXION  #####################-->

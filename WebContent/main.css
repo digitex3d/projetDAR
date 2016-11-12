@@ -10,6 +10,13 @@
 	
 }
 
+.popoutpanel {
+	max-height: 500px; 
+	transition-property: all;
+	transition-duration: 1s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
 .imageAnnonce {
     border: 5px solid #ffffff;
     box-shadow: 0 0 20px -0px rgba(0, 0, 0, 0.47);

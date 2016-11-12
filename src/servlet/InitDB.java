@@ -59,6 +59,7 @@ public class InitDB extends HttpServlet{
 						+ "password VARCHAR(255) NOT NULL, "
 						+ "prenom VARCHAR(20) NOT NULL, "
 						+ "nom VARCHAR(20) NOT NULL, "
+						+ "mail VARCHAR(20) NOT NULL, "
 						+ "PRIMARY KEY ( id )); ";
 				inst.executeUpdate(query2);
 				ResultSet rs2 = inst.executeQuery(query);

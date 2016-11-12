@@ -3,6 +3,7 @@ import java.sql.*;
 
 import services.service.ServiceTools;
 import database.DBStatic;
+import entities.User;
 
 /**
  * 
@@ -10,10 +11,10 @@ import database.DBStatic;
  *
  */
 public class AuthentificationTools {
-	public static void createUser(String login, String password, String prenom, String nom){
+	public static void createUser(String login, String password, String prenom, String nom, String mail){
 		try {
 			Connection conn= DBStatic.getMySQLConnection();
-			String query = "INSERT INTO login VALUES (null, '"+login+"', PASSWORD('"+password+"'), '"+prenom+"','"+nom+"');";
+			String query = "INSERT INTO login VALUES (null, '"+login+"', PASSWORD('"+password+"'), '"+prenom+"','"+nom+"','"+mail+"');";
 			Statement inst = conn.createStatement();
 			inst.executeUpdate(query);
 			inst.close();
@@ -25,6 +26,33 @@ public class AuthentificationTools {
 
 	}
 	
+	/**
+	 * 
+	 * FR : getUser(email) : Retourne un objet repr�sentant l'utilisateur 
+	 * dont l'id correspond � celui passer en param�tre.
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 * @throws Exception
+	 */
+	public static User getUser(int id)
+			throws SQLException{	
+		String sqlQuery = "SELECT * FROM login WHERE id='" + id +"';";
+		Connection c = DBStatic.getMySQLConnection();
+		Statement s = c.createStatement();
+		ResultSet rs = s.executeQuery(sqlQuery);
+
+		if (!rs.next())
+			return null;
+
+		User user = new User(rs.getInt("id"), rs.getString("mail"), rs.getString("password"), rs.getString("nom"), rs.getString("prenom"));
+
+		rs.close();
+		s.close();
+		c.close();	
+
+		return user;
+	}
 	
 	/**
 	 * Supprime une clé de la base de données

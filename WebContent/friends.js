@@ -200,8 +200,26 @@ FriendsList.traiterResponseJSON = function(data){
 	var friends = environnement.friendsList.getHtml();
 	$("#friends_list").html(friends);
 	$("#nb_amis").html("("+environnement.friendsList.size+")");
+	
+	// Handler pour le popout
+	for (var i in environnement.friendsList.friends) {
+		friend_id = environnement.friendsList.friends[i].id;
+		$("#friend_id_"+ friend_id).mouseover(
+    		function () {getuserinfo( friend_id );  		}		
+    		
+		);
+		
+		$("#friend_id_"+ friend_id).mouseout(
+	    		function () {
+	    			
+	    			$( "#popoutpanel_"+ friend_id ).hide(); 
+	    		       }		
+	    		
+			);
+	}
 	search();	
 	
 };
+
 
 //######################### FRIENDS LIST END #############################
