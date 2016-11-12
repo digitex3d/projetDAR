@@ -31,7 +31,7 @@
 						<div id="timeline" class="panel">
 							<h1>Logements</h1>
 							<div class="onlyFriends">
-								<label for="onlyFriends">Seulement amis</label> <input
+								<label for="onlyFriends">Seulement following</label> <input
 									type="checkbox" onclick='only_friends(this);' value="None"
 									id="onlyFriends_chk" name="check" />
 							</div>

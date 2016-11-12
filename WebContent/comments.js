@@ -153,7 +153,20 @@ Comment.prototype.getExtHtml = function () {
 			"<td class='annonce'>"+
 			this.addr+
 			"</td>"+
-		"</tr>";
+		"</tr>"+
+		"<tr class='annonce'>"+
+			"<td class='annonce'>"+
+				"<p>Stations RATP</p><br>"+
+		"</td>"+
+		"<td class='annonce'>"+
+		
+		getRATPstationsHTML(this.lat, 
+				this.lng, 
+				500,
+				15)+
+		"</td>"+
+	"</tr>"
+			;
 
 	if( this.refpage != null){
 
@@ -469,6 +482,28 @@ function insertCmt (form){
 
 	}
 
+}
+
+// Fonction qui renvoie le code HTML d'un iframe de l'RATP
+function getRATPstationsHTML(cercle_lat, 
+		cercle_lng, 
+		cercle_r,
+		zoom){
+	
+	var resu ="<iframe src='http://data.ratp.fr/explore/embed/dataset/positions-geographiques-des-stations-du-reseau-ratp/map/"+
+			"?disjunctive.stop_name"+
+			"&disjunctive.code_postal"+
+			"&disjunctive.departement"+
+			"&geofilter.distance="+cercle_lat+","+cercle_lng+","+cercle_r+
+			"&location="+zoom+","+cercle_lat+","+cercle_lng+
+			"&dataChart=eyJxdWVyaWVzIjpbeyJjb25maWciOnsiZGF0YXNldCI6InBvc2l0aW9ucy1nZW9ncmFwaGlxdWVzLWRlcy1zdGF0aW9ucy1kdS1yZXNlYXUtcmF0cCIsIm9wdGlvbnMiOnsiZGlzanVuY3RpdmUuc3RvcF9uYW1lIjp0cnVlLCJkaXNqdW5jdGl2ZS5jb2RlX3Bvc3RhbCI6dHJ1ZSwiZGlzanVuY3RpdmUuZGVwYXJ0ZW1lbnQiOnRydWV9fSwiY2hhcnRzIjpbeyJ0eXBlIjoiY29sdW1uIiwiZnVuYyI6IkFWRyIsInlBeGlzIjoic3RvcF9pZCIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlLCJjb2xvciI6IiM2NmMyYTUifV0sInhBeGlzIjoic3RvcF9uYW1lIiwibWF4cG9pbnRzIjo1MCwic29ydCI6IiJ9XX0%3D&static=false&datasetcard=false' width='500' height='500' frameborder='0'>"+
+			"</iframe>";
+	
+	return resu;
+
+
+	
+	
 }
 
 //TODO: modifier gestion erreurs
