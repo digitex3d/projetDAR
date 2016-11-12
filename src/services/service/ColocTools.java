@@ -43,7 +43,7 @@ public static final String MDB_NAME = "dar";
 		DBObject query = new BasicDBObject("id", commentId );
 		
 		GeneralTools.serverLog("Query: {"+ query.toString() + ", " + object.toString()+" }");
-		collection.update(query, object);
+		collection.update(query, object,true,false);
 		
 		m.close();
 		return status;

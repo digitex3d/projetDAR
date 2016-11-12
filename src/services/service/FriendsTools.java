@@ -34,15 +34,19 @@ public class FriendsTools {
 		Mongo m = DBStatic.getMongoConnection();
 		DB db = m.getDB(MDB_NAME);
 		DBCollection collection = db.getCollection("friends");
+		
+
+	
 
 		//db.friends.update( {"id": adderId }, { $push:{ "friends": firendID }})
 		DBObject object = new BasicDBObject("$addToSet", new BasicDBObject("friends",firendID));
 		DBObject query = new BasicDBObject("id",adderId );
 
 		GeneralTools.serverLog("Query: {"+ query.toString() + ", " + object.toString()+" }");
-		collection.update(query, object);
+		collection.update(query, object, true,false);
 
 		m.close();
+	
 
 	}
 
