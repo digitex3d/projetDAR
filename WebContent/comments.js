@@ -158,7 +158,7 @@ Comment.prototype.getExtHtml = function () {
 		"</tr>"+
 		"<tr class='annonce'>"+
 			"<td class='annonce'>"+
-				"<p>Stations RATP</p><br>"+
+				"<p>Stations RATP</p><span>Les stations RATP dans le voisinage du logement</span>"+
 		"</td>"+
 		"<td class='annonce'>"+
 			"<div id='mapRATP'></div>"+
@@ -168,7 +168,7 @@ Comment.prototype.getExtHtml = function () {
 	
 	"<tr class='annonce'>"+
 		"<td class='annonce'>"+
-			"<p>Colocataires</p><br>"+
+			"<p>Colocataires</p><span>La liste des personnes souhaitant se mettre en colocation</span>"+
 	"</td>"+
 	"<td class='annonce'>"+
 	coloc_button+

@@ -132,7 +132,7 @@ public class AddComment extends HttpServlet{
 			 * On récupère les donnés des stations RATP à partir de son api REST.
 			 */
 			
-			String RATPquery = genRATPquery(lat, lng, "500");
+			String RATPquery = genRATPquery(lat, lng, "1000");
 			
 			// Connection à L'API RATP
 			URLConnection connection = new URL(RATP_API_URL + "?" + RATPquery).openConnection();

@@ -174,7 +174,7 @@ User.prototype.getHtml = function(){
 	var remove_button = "<span class=\"friendRemove\">" +
 					 	"</span>";
 	
-	if( user != undefined){
+	if( user != undefined & environnement.actif != this){
 		remove_button = "<a class=\"add_button\" href=\" javascript: removeFriend("+ this.id +"); \" >" +
 				"<img src=\"remove_friend.png\" alert=\"Supprime ami\"></img>"+
 				"</a>";  					

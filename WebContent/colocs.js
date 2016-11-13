@@ -113,7 +113,7 @@ function  updateColocs(){
 			for ( var user_id in coloc_ids ){
 				var cuser = users[coloc_ids[user_id]];
 				if( cuser )
-					colocNamesHTML += "<p>" + cuser.login + "</p>"; 
+					colocNamesHTML += "<p>" + cuser.getHtml() + "</p>"; 
 				
 			}
 				var nb = coloc_ids.length;
