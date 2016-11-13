@@ -1,7 +1,7 @@
 <div id="left_panel">
 	<!-- ##################### DASHBOARD ##################### -->
 	<div id="dashboard" class="panel">
-		<a href="main.jsp"><h1>Jecoloc</h1></a>
+		<a href="main.jsp"><img src="house-icon.png" height="175"/></a>
 		<div class="profile">
 			<div id="fullname"></div>
 			<a href="addlogement.jsp">Ajouter logement</a>

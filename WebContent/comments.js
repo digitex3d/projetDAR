@@ -253,7 +253,8 @@ Comment.prototype.getImagesDiv = function(onlyFirst) {
 	if( this.imgid == null ){
 		imagesDivHTML += "<div class='imageAnnonce' id='image_"+cid+"0'>"+
 		"<img src='house-icon.png' width='200' height='200'></img>"+
-		"</div></div>";
+		"</div></div>"+
+		"<p style='color:gray;position: relative; top: -150px; text-align:center;'> Photo non disponible</p>";
 		
 		return imagesDivHTML;
 		
@@ -263,7 +264,8 @@ Comment.prototype.getImagesDiv = function(onlyFirst) {
 		for( var i = 0; i < this.nbimg; i ++){
 			imagesDivHTML += "<div class='imageAnnonce' id='image_"+cid+i+"'>"+
 			"<img src='"+locimagePath+i+".png?width=200&height=200"+"'></img>"+
-			"</div>";
+			"</div>"		
+			;
 			
 		}
 		
@@ -306,45 +308,85 @@ Comment.prototype.getHtml = function() {
 
 
 	
-	
+	var description = 	"<table class='annoncel' style='margin: 25px 0px;'>" +
+			"<tr class='annoncel'>"+
+	"<td class='annoncel'>"+
+	"<p>Prix</p>"+
+"</td>"+
+"<td class='annoncel'>"+
+	"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">" +
+			"<p class='prix'>"
+			+this.prix + "€</p>" +
+	"</div>" +
+"</td>"+
+"</tr>"+
+"<tr class='annoncel'>"+
+"<td class='annoncel'>"+
+"<p>Déscription</p>"+
+"</td>"+
+"<td class='annoncel'>"+
+"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
+"<p class='description'>" +
+this.desc +"</p>" +
+"</div>" +
+"</td>"+
+"</tr>"+
+"<tr class='annoncel'>"+
+"<td class='annoncel'>"+
+	"<p>Dimension</p>"+
+"</td>"+
+"<td class='annoncel'>"+
+	"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
+		"<p class='dimension'>" +
+		this.dim + "m²</p>"+
+		"</div>"+
+"</td>"+
+"</tr>"+
+"<tr class='annoncel'>"+
+"<td class='annoncel'>"+
+	"<p>Auteur</p>"+
+"</td>"+
+"<td class='annoncel'>"+
+	"<div class=\"auteur_logement\" id=\"auteur_id_"+cid+"\">" +
+		add_button+
+		"<span class=\"commentAuthor\">" +
+		this.author.login+
+		"</span>" +
+		"</div>"+
+"</td>"+
+"</tr>"+
+"</table>";
 	
 	
 	
 	var resu = 	"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
 					"<div class=\"commentDiv\">" +
+					"<h2 class=\"commentContent\">" +
+					this.text+
+					
+					"</h2>" + "</a>" +
 					"<table>"+
 						"<tr>"+
-						"<td>"+
+							"<th>"+
 						
-						this.getImagesDiv(true)+
-						"</td>"+
-						"<td style='width: 100%'>"+
-						add_button+
-						"<span class=\"commentAuthor\">" +
-							this.author.login+
-						"</span>" +
-						"<a class=\"annonce_link\""+
-						" href='annonce.jsp?id="+ cid +"' >"+
-						"<span class=\"commentContent\">" +
-							this.text+
-						"</span>" + "</a>" +
-						"<span class=\"commentDate\">" +
-							this.date+
-						"</span>" +
-						"<div class=\"prix_logement\" id=\"prix_id_"+cid+"\">" +
-								this.prix +
-						"</div>" +
-						"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
-							this.desc +
-						"</div>" +
-						"<div class=\"dim_logement\" id=\"dim_id_"+cid+"\">" +
-							this.dim +
-						"</div>" +
+								this.getImagesDiv(true)+
+							"</th>"+
+							"<th style='width: 100%'>"+
+							
+									
+										"<a class=\"annonce_link\""+
+											" href='annonce.jsp?id="+ cid +"' >"+
+										
+											"<span class=\"commentDate\">" +
+											this.date+
+											"</span>" +
+											
+											description+
 					
-						"</td>"+
+							"</th>"+
 						"</tr>"+
 					"</table>"+
-						"<div class=\"line_separator\"></div>" +
+					"<div class=\"line_separator\"></div>" +
 				"</div>\n";
 	
 

@@ -3,11 +3,14 @@
 <html lang="fr-FR">
 
 <head>
-<title>projetDAR</title>
+<title>Jecoloc</title>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="main.css">
-
+<link rel="stylesheet" type="text/css" href="CSS/annonce.css">
+<link rel="icon" 
+      type="image/png" 
+      href="house-icon.png">
 <link rel="stylesheet" type="text/css" href="loading.css">
 </head>
 <body>

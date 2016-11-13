@@ -34,7 +34,8 @@ public class ConnectionFilter implements Filter {
 		
 		System.out.println("CONNECTION FILTER : " + path);
 		
-		if	(	path.startsWith("/CSS")	||
+		if	(	
+				path.startsWith("/CSS")	||
 				path.startsWith("/js")	||
 				path.startsWith("/fragments") ||
 				path.startsWith("/resources") ||
@@ -43,7 +44,8 @@ public class ConnectionFilter implements Filter {
 				path.startsWith("/register") ||
 				path.startsWith("/errors") || 
 				path.startsWith("/jquery-1.11.0.js") || 
-				path.startsWith("/search.js")
+				path.startsWith("/search.js") ||
+				path.startsWith("/house-icon")
 			) {
 			chain.doFilter(request, response);
 			System.out.println("CONNECTION FILTER : skipped ");

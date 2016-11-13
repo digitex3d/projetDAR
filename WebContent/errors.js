@@ -16,6 +16,9 @@ function fonc_erreur(e, msg){
 	}
 	
 	$(".error_boxs").css({"display":"block"});
+	setTimeout(function() {
+	    $(".error_boxs").fadeOut('slow');
+	}, 4000); // <-- time in milliseconds
 
 }
 

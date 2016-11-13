@@ -94,6 +94,7 @@ public class CommentsTools {
 		DBCursor cursor;
 		DBCollection collection = db.getCollection("comments");
 		
+		// Recherche sur le titre, la description et les stations RATP proches.
 	    DBObject quoteQuery = QueryBuilder.start()
 	            .or(new QueryBuilder().start().put("text").is(Pattern.compile(query, Pattern.CASE_INSENSITIVE)).get(),
 	                new QueryBuilder().start().put("desc").is(Pattern.compile(query, Pattern.CASE_INSENSITIVE)).get()).get();
