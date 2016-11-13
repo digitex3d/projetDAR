@@ -46,6 +46,8 @@ function addFriend(id){
 	     });
 	    
 	}
+	updateColocs();
+	friends();
 }
 
 /*
@@ -70,6 +72,8 @@ function removeFriend(id){
 	     });
 	    
 	}
+	updateColocs();
+	friends();
 }
 
 // Renvoie true si id est un ami

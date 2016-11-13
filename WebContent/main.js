@@ -181,8 +181,7 @@ User.prototype.getHtml = function(){
 						
 	}
 	
-	
-	
+
     var resu = 	"<div id=\"friend_" + this.id + "\" class=\"friend\"><p>" + 
     					remove_button+
     					"<span class=\"friendName\" id='friend_id_"+ this.id +"'  >" +
@@ -196,9 +195,40 @@ User.prototype.getHtml = function(){
 
     
     
+    
+    
     return resu.toString();
 	
 };
+
+
+
+
+User.prototype.getHtmlEXT = function(){
+	var current_user=environnement.actif;
+	var add_button = "<span class=\"friendRemove\">" +
+					 	"</span>";
+	
+	if( current_user != undefined ){
+		if(		!isFriend(this.id) &&
+				current_user.id != this.id){
+			add_button = 	"<span class=\"friendAdd\">" +
+								"<a class=\"add_button\""+
+								" href=\" javascript: addFriend("+ this.id +"); \" >"+
+								"<img src=\"add_friend.png\" alert=\"Ajoute ami\"></img>"+
+								"</a>"+   					
+							"</span>";
+		}
+
+	}
+
+	var resu = add_button + this.login;
+    
+    
+    
+    
+    return resu.toString();
+}
 
 
 

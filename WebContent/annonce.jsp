@@ -203,6 +203,7 @@
 				// Afficher les colocataires
 				//TODO: changer nom
 				updateColocs();
+				colocs();
 				
 			}
 			
