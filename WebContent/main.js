@@ -18,8 +18,8 @@ function main(id, login, key) {
 	environnement.timeline = new Timeline();
 	// Liste des amis
 	environnement.friendsList = new FriendsList();
-	// Liste des likes
-	environnement.likesList = new LikesList();
+	// Liste des colocs
+	environnement.colocsList = new ColocsList();
 	// Images temporaires
 	environnement.images = {};
 	
@@ -29,7 +29,7 @@ function main(id, login, key) {
 		environnement.key=key;
 		environnement.actif=new User(id,login);
 		search();
-		likes();
+		colocs();
 		friends();
 		gererDivConnexion();
 
@@ -54,7 +54,7 @@ function gererDivConnexion(){
 		$(".onlyFriends").css("display","none");
 		$(".offline_panels").css("display","block" ) ;
 		$("#dashboard").css("display","none"); 
-		$(".likes").css("display","none"); 
+		$(".colocs").css("display","none"); 
 		
 	}
 	else {
@@ -64,7 +64,7 @@ function gererDivConnexion(){
 		$("#left_panel").css("display","block"); 
 		$("#fullname").html("<p>Bonjour, " + "<font color=\"red\">"+user.login+"</font></p>");
 		$(".onlyFriends").css("display","block");
-		$(".likes").css("display","block"); 
+		$(".colocs").css("display","block"); 
 
 	}
 	

@@ -35,7 +35,7 @@ function validateEntry(e){
 		fonc_erreur(e, e.attr("name") + " ne peut pas être vide");
 		return false;
 		
-	}else if (e.val().length > 20){
+	}else if (e.val().length > 50){
 		fonc_erreur(e, e.attr("name") + " est trop grand");
 		return false;
 		

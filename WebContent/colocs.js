@@ -1,9 +1,9 @@
 /**
- * ################################# LIKES ##############################################
+ * ################################# COLOCS ##############################################
  */
 
 //Fonction qui initialise les colocs
-function likes(){
+function colocs(){
 	var user=environnement.actif;
 	if( user != undefined){
 		  $.ajax({
@@ -15,7 +15,7 @@ function likes(){
 	          url: server_path + "coloc",
 	          dataType: "json",
 	          scriptCharset: "utf-8" ,
-	          success: LikesList.traiterResponseJSON ,
+	          success: ColocsList.traiterResponseJSON ,
 	          error: traiteReponseErreur
 	          
 	    });
@@ -39,7 +39,7 @@ function coloc(comment_id){
 	           url: server_path + "coloc",
 	           dataType: "json",
 	           scriptCharset: "utf-8" ,
-	           success: traiteReponseAddLike,
+	           success: traiteReponseAddColoc,
 	           error: traiteReponseErreur
 	           
 	     });
@@ -48,12 +48,12 @@ function coloc(comment_id){
 }
 
 // Ajoute une coloc
-function traiteReponseAddLike(data){
+function traiteReponseAddColoc(data){
 	   if (data.error != undefined) {
 	    	 fonc_erreur(null , data.error);
 	    }
 	    else {
-	    	likes();
+	    	colocs();
 	    	
 	    }
 	   
@@ -61,77 +61,77 @@ function traiteReponseAddLike(data){
 
 // ######################### Colocation LIST #############################
 /*
- * Class qui contient une liste de likes
+ * Class qui contient une liste des colocs
  */
-function LikesList(){
-	this.likes = [];
+function ColocsList(){
+	this.colocs = [];
 	this.size = 0;
 	
 }
 
 // Ajoute un obj commentairede la friendLIST
-LikesList.prototype.addLikes = function(likes, comment_id){
-	this.likes[comment_id] = likes;
+ColocsList.prototype.addColocs = function(colocs, comment_id){
+	this.colocs[comment_id] = colocs;
 	this.size++;
 	
 };
 
 //Ajoute un obj commentaire de la friendLIST
-LikesList.prototype.flush = function(){
-	this.likes = [];
+ColocsList.prototype.flush = function(){
+	this.colocs = [];
 	this.size = 0;
 	
 };
 
 //Traite la reponse d'une list query
-LikesList.traiterResponseJSON = function(data){
-	environnement.likesList.flush();
+ColocsList.traiterResponseJSON = function(data){
+	environnement.colocsList.flush();
 	
 	for( var i in data ){
 		var comment = data[i];
-		environnement.likesList.addLikes(comment.likes, comment.id);
+		environnement.colocsList.addColocs(comment.colocs, comment.id);
 		
 	}
 	
 	search();
 };
 
-//######################### LIKES LIST END #############################
+//######################### COLOCS LIST END #############################
 
-// fonction qui met à jour le nombre des likes
-function  updateLikes(){
+// fonction qui met à jour le nombre des colocs
+function  updateColocs(){
 	var user=environnement.actif;
 	var users = environnement.users;
-	var likes = environnement.likesList.likes;
+	var colocs = environnement.colocsList.colocs;
 	var colocNamesHTML = "";
 	
 	if(user != undefined &&
 			environnement.timeline.comments.size != 0){
-		for (var comment_id in likes) {
+		for (var comment_id in colocs) {
 			colocNamesHTML = "";
-			var like_ids = likes[comment_id];
-			for ( var user_id in like_ids ){
-				var cuser = users[like_ids[user_id]];
+			var coloc_ids =colocs[comment_id];
+			for ( var user_id in coloc_ids ){
+				var cuser = users[coloc_ids[user_id]];
 				if( cuser )
 					colocNamesHTML += "<p>" + cuser.login + "</p>"; 
 				
 			}
-				var nb = like_ids.length;
+				var nb = coloc_ids.length;
 			$("#coloc_names_"+ comment_id).html(colocNamesHTML);
 
 		}
 	}
 }
 
-// Retourne true si liked false sinon
+// Retourne true si colocd false sinon
 function isColoc(comment_id){
 	var user = environnement.actif;
-	var likes = environnement.likesList.likes;
+	var colocs = environnement.colocsList.colocs;
 
 	if (user != undefined){
-			var like_ids = likes[comment_id];
-			for(var i in like_ids ){
-				if(user.id == like_ids[i]){
+			var coloc_ids = colocs[comment_id];
+			for(var i in coloc_ids ){
+				if(user.id == coloc_ids[i]){
 					return true;
 				}
 

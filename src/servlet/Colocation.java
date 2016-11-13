@@ -75,7 +75,7 @@ public class Colocation extends HttpServlet{
 
 			switch( mode_int){
 			case 0:
-				out.write( new JSONObject().put("liked", coloc(userId , commentId, out ) ).toString());
+				out.write( new JSONObject().put("colocd", coloc(userId , commentId, out ) ).toString());
 				break;
 			case 1:
 				out.write( getColocs(out).toString());
@@ -123,10 +123,10 @@ public class Colocation extends HttpServlet{
 			resu = ColocTools.coloc(userId, commentId);
 
 		}catch (UnknownHostException e){
-			out.write( new JSONObject().put("error", "Erreur d'insertion du like, " + e.getMessage()).toString());
+			out.write( new JSONObject().put("error", "Erreur d'insertion du coloc, " + e.getMessage()).toString());
 
 		}catch  (MongoException e){
-			out.write( new JSONObject().put("error", "Erreur d'insertion du like, " + e.getMessage()).toString());
+			out.write( new JSONObject().put("error", "Erreur d'insertion du coloc, " + e.getMessage()).toString());
 
 		}
 

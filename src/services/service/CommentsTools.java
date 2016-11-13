@@ -72,7 +72,7 @@ public class CommentsTools {
 		// Adding RATPstations
 		object.put("RATPStations", (BasicDBObject) RATPstations);
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyyTHH:mm:ss");
 		Date today = new Date();
 
 		object.put("date", dateFormat.format(today));

@@ -71,7 +71,7 @@
 									</div>
 
 									<div class="section">
-										<span>3</span>Déscription
+										<span>4</span>Déscription
 									</div>
 									<div class="inner-wrap">
 										<label id="oblig">Une déscription du logement <input
@@ -80,7 +80,7 @@
 										</label>
 									</div>
 									<div class="section">
-										<span>3</span>URL de référence ( Optionel )
+										<span>5</span>URL de référence ( Optionel )
 									</div>
 									<div class="inner-wrap">
 										<label>Si vous faites référence à une autre annonce <input
@@ -90,7 +90,7 @@
 									</div>
 
 									<div class="button-section">
-										<input type="submit" name="Ajoute" /> 
+										<input type="submit" name="Ajoute" value="Ajouter"/> 
 									</div>
 								</form>
 							</div>
@@ -118,7 +118,7 @@
 	<script type="text/javascript" src="comments.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="friends.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="errors.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="colocs.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="main.js" charset="UTF-8"></script>
 	<script async defer type="text/javascript" src="gmaps.js"
 		charset="UTF-8"></script>

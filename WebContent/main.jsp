@@ -56,7 +56,7 @@
 	<script type="text/javascript" src="comments.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="friends.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="errors.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="likes.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="colocs.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="main.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="uploadImage.js" charset="UTF-8"></script>
 	

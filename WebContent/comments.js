@@ -71,7 +71,7 @@ function Comment (id,
 	this.author=author;
 	this.text=text;
 	this.date=date;
-	this.likes;
+	this.colocs;
 	this.prix=prix;
 	this.desc=desc;
 	this.dim=dim;
@@ -129,7 +129,7 @@ Comment.prototype.getExtHtml = function () {
 	"</tr>"+
 	"<tr class='annonce'>"+
 			"<td class='annonce'>"+
-				"<p>Déscription</p><br>"+
+				"<p>Description</p><br>"+
 				"</td>"+
 				"<td class='annonce'>"+
 				"<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
@@ -161,18 +161,12 @@ Comment.prototype.getExtHtml = function () {
 				"<p>Stations RATP</p><br>"+
 		"</td>"+
 		"<td class='annonce'>"+
-		
-		getRATPstationsHTML(this.lat, 
-				this.lng, 
-				500,
-				15)+
-				
 			"<div id='mapRATP'></div>"+
 		"</td>"+
 	"</tr>"
 			;
 
-	if( this.refpage != null){
+	if( this.refpage.title != null){
 
 		var refpageHTML = "<tr class='annonce'>"+
 		"<td class='annonce'>"+
@@ -289,7 +283,7 @@ Comment.prototype.getHtml = function() {
 	var add_button = "<span class=\"friendAdd\">" +
 						"</span>";
 	var cid = this.id;
-	var like_button;
+	var coloc_button;
 	
 
 	
@@ -322,7 +316,7 @@ Comment.prototype.getHtml = function() {
 "</tr>"+
 "<tr class='annoncel'>"+
 "<td class='annoncel'>"+
-"<p>Déscription</p>"+
+"<p>Description</p>"+
 "</td>"+
 "<td class='annoncel'>"+
 "<div class=\"desc_logement\" id=\"desc_id_"+cid+"\">" +
@@ -361,6 +355,8 @@ this.desc +"</p>" +
 	
 	var resu = 	"<div id=\"comment_" + cid + "\" class=\"comment\">" + 
 					"<div class=\"commentDiv\">" +
+					"<a class=\"annonce_link\""+
+					" href='annonce.jsp?id="+ cid +"' >"+
 					"<h2 class=\"commentContent\">" +
 					this.text+
 					
@@ -374,8 +370,7 @@ this.desc +"</p>" +
 							"<th style='width: 100%'>"+
 							
 									
-										"<a class=\"annonce_link\""+
-											" href='annonce.jsp?id="+ cid +"' >"+
+									
 										
 											"<span class=\"commentDate\">" +
 											this.date+
@@ -432,11 +427,13 @@ Comment.traiterResponseJSON = function(data){
 
 	// Sort sur la date du commentaire
 	environnement.timeline.comments.sort(function(a, b) 
-			{return new Date(b.date) - new Date(a.date);});
+			{
+		
+		return new Date(b.date) - new Date(a.date);});
 
 	timeline = environnement.timeline.getHtml();
 	$("#comment_box").html(timeline);
-	updateLikes();
+	updateColocs();
 	$("#circularG").css("visibility","hidden");
 	
 };
@@ -458,7 +455,7 @@ function extItem(cid){
 	
 	// Afficher les colocataires
 	//TODO: changer nom
-		updateLikes();
+		updateColocs();
 }else{
 	alert(timeline.getComment(cid));
 	return;
@@ -531,27 +528,6 @@ function insertCmt (form){
 
 }
 
-// Fonction qui renvoie le code HTML d'un iframe de l'RATP
-function getRATPstationsHTML(cercle_lat, 
-		cercle_lng, 
-		cercle_r,
-		zoom){
-	
-	var resu ="<iframe src='http://data.ratp.fr/explore/embed/dataset/positions-geographiques-des-stations-du-reseau-ratp/map/"+
-			"?disjunctive.stop_name"+
-			"&disjunctive.code_postal"+
-			"&disjunctive.departement"+
-			"&geofilter.distance="+cercle_lat+","+cercle_lng+","+cercle_r+
-			"&location="+zoom+","+cercle_lat+","+cercle_lng+
-			"&dataChart=eyJxdWVyaWVzIjpbeyJjb25maWciOnsiZGF0YXNldCI6InBvc2l0aW9ucy1nZW9ncmFwaGlxdWVzLWRlcy1zdGF0aW9ucy1kdS1yZXNlYXUtcmF0cCIsIm9wdGlvbnMiOnsiZGlzanVuY3RpdmUuc3RvcF9uYW1lIjp0cnVlLCJkaXNqdW5jdGl2ZS5jb2RlX3Bvc3RhbCI6dHJ1ZSwiZGlzanVuY3RpdmUuZGVwYXJ0ZW1lbnQiOnRydWV9fSwiY2hhcnRzIjpbeyJ0eXBlIjoiY29sdW1uIiwiZnVuYyI6IkFWRyIsInlBeGlzIjoic3RvcF9pZCIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlLCJjb2xvciI6IiM2NmMyYTUifV0sInhBeGlzIjoic3RvcF9uYW1lIiwibWF4cG9pbnRzIjo1MCwic29ydCI6IiJ9XX0%3D&static=false&datasetcard=false' width='500' height='500' frameborder='0'>"+
-			"</iframe>";
-	
-	return resu;
-
-
-	
-	
-}
 
 //TODO: modifier gestion erreurs
 function traiteReponseInsert(data) {
@@ -566,7 +542,7 @@ function traiteReponseInsert(data) {
 			
 		}
 		else {
-			likes();
+			colocs();
 			
 		}
 

@@ -32,6 +32,7 @@ public class ConnectionFilter implements Filter {
 		HttpSession session = request.getSession();
 		String path = request.getRequestURI().substring(request.getContextPath().length());
 		
+		
 		System.out.println("CONNECTION FILTER : " + path);
 		
 		if	(	
