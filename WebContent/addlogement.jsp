@@ -71,10 +71,10 @@
 									</div>
 
 									<div class="section">
-										<span>4</span>Déscription
+										<span>4</span>Description
 									</div>
 									<div class="inner-wrap">
-										<label id="oblig">Une déscription du logement <input
+										<label id="oblig">Une description du logement <input
 											placeholder="Description..." name="descInput" id="desc"
 											class="textArea" />
 										</label>
@@ -99,15 +99,7 @@
 					<td></td>
 				<tr>
 			</table>
-		
 			
-
-		</div>
-		</td>
-		</tr>
-		</table>
-	</div>
-	</div>
 	<!-- CONTENU PRINCIPAL -->
 
 	<!-- FOOTER -->

@@ -99,9 +99,9 @@ Comment.prototype.getExtHtml = function () {
 	var cid = this.id;
 	
 	if(!isColoc(cid)){
-		coloc_button = "<a id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">Propose colocation</a>";
+		coloc_button = "<a class='btnColocs' style='color:green' id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">+</a>";
 	}else{
-		coloc_button =  "<a id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">Enlève proposition colocation</a>";
+		coloc_button =  "<a class='btnColocsred'  style='color:red' id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">-</a>";
 	}
 	
 	var description = 
@@ -163,8 +163,25 @@ Comment.prototype.getExtHtml = function () {
 		"<td class='annonce'>"+
 			"<div id='mapRATP'></div>"+
 		"</td>"+
-	"</tr>"
-			;
+	"</tr>"+
+			
+	
+	"<tr class='annonce'>"+
+		"<td class='annonce'>"+
+			"<p>Colocataires</p><br>"+
+	"</td>"+
+	"<td class='annonce'>"+
+	coloc_button+
+	"<span  id=\"coloc_names_" + cid +"\"> </span>"+
+	"</div>" +
+	"</td>"+
+"</tr>"
+		
+		
+		
+		
+		
+		;
 
 	if( this.refpage.title != null){
 
@@ -216,13 +233,7 @@ Comment.prototype.getExtHtml = function () {
 		genHTMLtag("div", "description-containter_"+cid, "description", description)+
 		"</table>"+
 		
-				coloc_button+
 				
-				// Colocataires
-				"<div class=\"colocataires\"><p>Colocataires</p>"+	
-			
-				"<span  id=\"coloc_names_" + cid +"\"> </span>"+
-				"</div>" +
 				
 				"</div>\n"+
 		
@@ -247,8 +258,7 @@ Comment.prototype.getImagesDiv = function(onlyFirst) {
 	if( this.imgid == null ){
 		imagesDivHTML += "<div class='imageAnnonce' id='image_"+cid+"0'>"+
 		"<img src='house-icon.png' width='200' height='200'></img>"+
-		"</div></div>"+
-		"<p style='color:gray;position: relative; top: -150px; text-align:center;'> Photo non disponible</p>";
+		"</div></div>";
 		
 		return imagesDivHTML;
 		
