@@ -1,7 +1,5 @@
 // Formulaire pour ajouter un logement
 function ajouterUnLogementPage(){
-	
-	
 	$.ajax({
 		  url: "forms/ajouteLogementform.jsp",
 		  success: function(data){
@@ -26,7 +24,7 @@ function validateAddForm(form){
 	
 	if(flag){
 		insertCmt(form);
-		window.location.href = "main.jsp";
+		//window.location.href = "main.jsp";
 		
 	}
 

@@ -430,6 +430,8 @@ Comment.traiterResponseJSON = function(data){
 			{
 		
 		return new Date(b.date) - new Date(a.date);});
+	
+	environnement.timeline.comments.reverse();
 
 	timeline = environnement.timeline.getHtml();
 	$("#comment_box").html(timeline);
