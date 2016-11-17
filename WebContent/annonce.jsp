@@ -69,6 +69,7 @@
 
 	<!-- main script -->
 	<script type="text/javascript">
+	var googleMapsInit = false;
 	<% String filepath= application.getContextPath();
 		out.println("var imagepath=\""+filepath+"\";");%>
 	
@@ -89,26 +90,16 @@
 			if(cookie.getName().equals("login")) 
 				login = cookie.getValue();
 			
-		}
+		}%>
 	
 
-			if (sessionKey != null) {
-				out.println("main('" + id + "','" + login + "','" + sessionKey + "');");
-				//out.println("main('" + sessionKey + "');");
-
-			} else {
-				out.println("main();");
-
-			}%>
-			
-			// Add an event handler ont the file input change.
-			$("#imageSelect").change(uploadImage);
+	
 		
 		
 			
-			function initMapAnnonce(){
+			function initMapAnnonce(annce){
 				// Map position
-				var latlng = new google.maps.LatLng(annonce.lat, annonce.lng);
+				var latlng = new google.maps.LatLng(annce.lat, annce.lng);
 				
 				// Ajoute logement map
 				var map = new google.maps.Map(document.getElementById("map"), {
@@ -145,7 +136,7 @@
 				});
 				
 				// Initialiser les markers des station metro
-				var stations = annonce.RATPStations.records;
+				var stations = annce.RATPStations.records;
 				var stationsMarker = [];
 				
 				for( var i in stations){
@@ -189,31 +180,59 @@
 					
 				}	
 			
-	$(document).ready(	
-		function() {	
-			gmapsAPIkey = "AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4";
-			if( environnement.timeline != null)
-				var timeline=environnement.timeline;
-			else alert("timeline not defined");
+			function fillComment(){
+
+				// Add an event handler ont the file input change.
+				$("#imageSelect").change(uploadImage);
+		
+				
+				gmapsAPIkey = "AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4";
 			
-			if( timeline.getComment("<%out.write(request.getParameter("id"));%>") != null){
-				annonce = timeline.getComment("<%out.write(request.getParameter("id"));%>");
-				$("#timeline").html(annonce.getExtHtml());
+
+				var comments = environnement.timeline.comments;
 			
-				// Afficher les colocataires
-				//TODO: changer nom
-				updateColocs();
-				colocs();
+				for (var i in comments)
+					if( comments[i].id == "<%out.write(request.getParameter("id"));%>")
+						var annonce = comments[i];
+				
+
+				$("#timeline").html( annonce.getExtHtml());
+					
+						// Afficher les colocataires
+						//TODO: changer nom
+					colocs();
+	    			updateColocs();
+				
+	    			if( !googleMapsInit){
+	    			 $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4", function( ) {
+	 					initMapAnnonce(annonce);		
+	 				});
+	    			 googleMapsInit = true;
+	    			}
+	 			
+			
+
+				
 				
 			}
 			
-			$.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyCdRvJbx0egU7JQuyBJKou26YIqKwki4c4", function( ) {
-					initMapAnnonce();		
-				});
-		
+			window.onload	=
+		function() {	
+			<%
+			if (sessionKey != null) {
+				out.println("main('" + id + "','" + login + "','" + sessionKey + "');");
+				//out.println("main('" + sessionKey + "');");
+
+			} else {
+				out.println("if(main()){ }");
+
+			}
+			%>
 			
+			 fillComment();
 		
-			}); 
+		
+			};
 		
 
 	

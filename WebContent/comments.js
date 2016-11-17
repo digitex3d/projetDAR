@@ -99,9 +99,9 @@ Comment.prototype.getExtHtml = function () {
 	var cid = this.id;
 	
 	if(!isColoc(cid)){
-		coloc_button = "<a class='btnColocs' style='color:green' id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">+</a>";
+		coloc_button = "<a class='btnColocs'  id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">+</a>";
 	}else{
-		coloc_button =  "<a class='btnColocsred'  style='color:red' id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">-</a>";
+		coloc_button =  "<a class='btnColocsred'   id=\"propcoloc\" href=\"javascript:coloc('"+cid+"')\">-</a>";
 	}
 	
 	var description = 
@@ -447,7 +447,7 @@ Comment.traiterResponseJSON = function(data){
 	$("#comment_box").html(timeline);
 	updateColocs();
 	$("#circularG").css("visibility","hidden");
-	
+	 fillComment();
 };
 
 //############################ FIN COMMENT ###############################
@@ -461,9 +461,9 @@ function extItem(cid){
 	else return;
 	
 	if( timeline.getComment(cid) != null){
-		var annonce = timeline.getComment(cid);
+		var annoncel = timeline.getComment(cid);
 	
-		$("#timeline").html(annonce.getExtHtml());
+		$("#timeline").html(annoncel.getExtHtml());
 	
 	// Afficher les colocataires
 	//TODO: changer nom

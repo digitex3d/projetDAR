@@ -51,9 +51,12 @@ function coloc(comment_id){
 function traiteReponseAddColoc(data){
 	   if (data.error != undefined) {
 	    	 fonc_erreur(null , data.error);
+	    
 	    }
 	    else {
 	    	colocs();
+	  
+	    
 	    	
 	    }
 	   
@@ -92,8 +95,8 @@ ColocsList.traiterResponseJSON = function(data){
 		environnement.colocsList.addColocs(comment.colocs, comment.id);
 		
 	}
+	updateColocs();
 	
-	search();
 };
 
 //######################### COLOCS LIST END #############################
@@ -110,14 +113,28 @@ function  updateColocs(){
 		for (var comment_id in colocs) {
 			colocNamesHTML = "";
 			var coloc_ids =colocs[comment_id];
+			
+			// Change la couleur du bouton
+			if( !isColoc(comment_id) ){
+				$("#propcoloc").attr('class', 'btnColocs');
+				$("#propcoloc").html("+");
+			}
+			else{
+				$("#propcoloc").attr('class', 'btnColocsred');
+				$("#propcoloc").html("-");
+			}
+				
 			for ( var user_id in coloc_ids ){
 				var cuser = users[coloc_ids[user_id]];
-				if( cuser )
+				if( cuser ){
 					colocNamesHTML += "<p>" + cuser.getHtmlEXT() + "</p>"; 
+					
+				}
 				
 			}
 				var nb = coloc_ids.length;
 			$("#coloc_names_"+ comment_id).html(colocNamesHTML);
+	
 
 		}
 	}

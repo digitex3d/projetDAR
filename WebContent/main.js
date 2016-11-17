@@ -40,6 +40,8 @@ function main(id, login, key) {
 		gererDivConnexion();
 		
 	}
+	
+	return true;
    
 } 
 
